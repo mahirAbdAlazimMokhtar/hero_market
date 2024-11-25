@@ -1,0 +1,59 @@
+name: hero_market
+description: "A new Flutter project."
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/lottie/
+
+    
+  fonts:
+    - family: Switzer
+      fonts:
+        - asset: assets/fonts/Switzer-Black.otf
+        - asset: assets/fonts/Switzer-BlackItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Bold.otf
+        - asset: assets/fonts/Switzer-BoldItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Extrabold.otf
+        - asset: assets/fonts/Switzer-ExtraboldItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Extralight.otf
+        - asset: assets/fonts/Switzer-ExtralightItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Italic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Light.otf
+        - asset: assets/fonts/Switzer-LightItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Medium.otf
+        - asset: assets/fonts/Switzer-MediumItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Regular.otf
+        - asset: assets/fonts/Switzer-Semibold.otf
+        - asset: assets/fonts/Switzer-SemiboldItalic.otf
+          style: italic
+        - asset: assets/fonts/Switzer-Thin.otf
+        - asset: assets/fonts/Switzer-ThinItalic.otf
+          style: italic
