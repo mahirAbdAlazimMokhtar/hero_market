@@ -43,8 +43,9 @@ abstract class AppColors {
   static const Color darkThemeDarkNavBarColor = Color(0xff201f27);
 
   static Color classicAdaptiveTextColor(BuildContext context) =>
-      CoreUtils.adaptiveColor(context,
-          lightColor: lightThemePrimaryColor,
-          darkColor: lightThemeWhiteColor,
-          );
+      CoreUtils.adaptiveColor(
+        context,
+        lightModeColor: lightThemePrimaryColor,
+        darkModeColor: lightThemeWhiteColor,
+      );
 }

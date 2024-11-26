@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-abstract class TextStyles {
+abstract class AppTextStyles {
   /// weight: w700
   ///
   /// size: 48

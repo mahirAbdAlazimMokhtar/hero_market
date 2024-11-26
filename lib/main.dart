@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/resources/styles/colors.dart';
-import 'core/resources/styles/text.dart';
+import 'core/services/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
           foregroundColor: AppColors.lightThemePrimaryColor),
       useMaterial3: true,
     );
-    return MaterialApp(
+    return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: router,
         title: 'Hero Market App',
         themeMode: ThemeMode.system,
         theme: theme,
@@ -36,16 +38,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: AppColors.lightThemeWhiteColor,
           ),
         ),
-        home: Scaffold(
-          body: Container(
-            child: Center(
-              child: Text(
-                'Hello World',
-                style: TextStyles.headingRegular.copyWith(
-                    color: AppColors.classicAdaptiveTextColor(context)),
-              ),
-            ),
-          ),
-        ));
+       );
   }
 }
+//
