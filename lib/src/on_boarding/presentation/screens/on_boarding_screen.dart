@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class OnBoardingView extends StatefulWidget {
-  const OnBoardingView({super.key});
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
 
   @override
-  State<OnBoardingView> createState() => _OnBoardingViewState();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingViewState extends State<OnBoardingView> {
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final pageController = PageController();
 
   @override
