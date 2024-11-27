@@ -10,17 +10,18 @@ class AppBarBottom extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: preferredSize,
       child: ColoredBox(
-          color: CoreUtils.adaptiveColor(
-            context,
-            lightModeColor: Colors.white,
-            darkModeColor: AppColors.darkThemeDarkSharpColor,
-          ),
-          child: const SizedBox(
-            height: 1,
-            width: double.maxFinite,
-          )),
+        color: CoreUtils.adaptiveColor(
+          context,
+          lightModeColor: Colors.white,
+          darkModeColor: AppColors.darkThemeDarkSharpColor,
+        ),
+        child: const SizedBox(
+          height: 1,
+          width: double.maxFinite,
+        ),
+      ),
     );
-  }
+  } 
 
   @override
   Size get preferredSize => Size.zero;
