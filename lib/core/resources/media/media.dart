@@ -17,3 +17,4 @@ abstract class Media {
   /// Animated check mark for checkout completion
   static const checkMark = '$_baseLottie/check.json';
 }
+

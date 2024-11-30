@@ -31,7 +31,9 @@ final router = GoRouter(
     ),
     GoRoute(path: LoginScreen.path, builder: (_, __) => const LoginScreen()),
     ShellRoute(
-      routes: const [],
+      routes: [
+        GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
+      ],
       builder: (context, state, child) {
         return DashboardScreen(state: state, child: child);
       },
