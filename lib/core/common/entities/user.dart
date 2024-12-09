@@ -1,5 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
+import '../../../src/wishlist/domain_layer/entities/wishlist_product.dart';
 import 'address.dart';
 
 class User extends Equatable {
@@ -20,7 +22,6 @@ class User extends Equatable {
       required this.address,
       required this.phone});
 
-
   const User.empty()
       : id = 'Test String id',
         name = 'Test String Name',
@@ -29,7 +30,7 @@ class User extends Equatable {
         wishlist = const [],
         address = null,
         phone = null;
-  
+
   @override
   List<Object?> get props => [
         id,
@@ -38,6 +39,6 @@ class User extends Equatable {
         isAdmin,
         wishlist.length,
       ];
+
 }
 
-class WishlistProduct {}

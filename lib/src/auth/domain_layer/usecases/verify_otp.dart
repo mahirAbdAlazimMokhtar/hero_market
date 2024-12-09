@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hero_market/core/usecase/usecase.dart';
 import 'package:hero_market/core/utils/typedefs.dart';
-import 'package:hero_market/src/auth/domain_layer/repositories/auth_repository.dart';
-
+import '../repositories/auth_repository.dart';
 class VerifyOtp extends UsecasesWithParams<void, VerifyOtpParams> {
   final AuthRepository _repository;
 

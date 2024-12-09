@@ -15,7 +15,7 @@ abstract class AuthRepository {
     required String password,
   });
 
-  ResultFuture<void> forgetPassword({String email});
+  ResultFuture<void> forgetPassword(String email);
 
 
   ResultFuture<void> verifyOtp({required String email, required String otp});
