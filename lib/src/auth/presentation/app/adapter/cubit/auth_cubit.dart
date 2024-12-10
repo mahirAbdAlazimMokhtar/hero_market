@@ -44,4 +44,61 @@ class AuthCubit extends Cubit<AuthState> {
       emit(LoggedIn(user));
     });
   }
+
+  Future<void> register({
+    required String email,
+    required String password,
+    required String name,
+    required String phone,
+  }) async {
+    emit(AuthLoading());
+    final result = await _register(RegisterParams(
+      email: email,
+      password: password,
+      name: name,
+      phone: phone,
+    ));
+    result.fold(
+      (failure) => emit(AuthError(failure.errorMessage)),
+      (_) => emit(const Registered()),
+    );
+  }
+
+  Future<void> forgetPassword(String email) async {
+    emit(AuthLoading());
+    final result = await _forgetPassword(email);
+    result.fold((failure) => emit(AuthError(failure.errorMessage)),
+        (_) => emit(const OTPSent()));
+  }
+
+  Future<void> resetPassword(
+      {required String email, required String newPassword}) async {
+    emit(AuthLoading());
+    final result = await _resetPassword(
+        ResetPasswordParams(email: email, newPassword: newPassword));
+    result.fold(
+      (failure) => emit(AuthError(failure.errorMessage)),
+      (_)=> emit(const PasswordReset()),
+    );
+  }
+
+  Future<void> verifyOtp({required String email, required String otp})async {
+    emit(AuthLoading());
+    final result = await _verifyOtp(VerifyOtpParams(email: email, otp: otp));
+    result.fold((failure) => emit(AuthError(failure.errorMessage)),
+        (_) => emit(const OTPVerified()));
+  }
+
+  Future<void> verifyToken() async {
+    emit(AuthLoading());
+    final result = await _verifyToken();
+    result.fold((failure) => emit(AuthError(failure.errorMessage)),
+        (isValid) {
+          emit( TokenVerified(isValid));
+          if(!isValid){
+            UserProvider.instance.setUser(null);
+          }
+        });
+  }
 }
+
