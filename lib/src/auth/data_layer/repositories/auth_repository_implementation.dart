@@ -13,8 +13,6 @@ class AuthRepositoryImplementation implements AuthRepository {
   const AuthRepositoryImplementation(this._remoteDataSource);
   final AuthRemoteDataSource _remoteDataSource;
 
-
-
   @override
   ResultFuture<User> login(
       {required String email, required String password}) async {
@@ -97,14 +95,14 @@ class AuthRepositoryImplementation implements AuthRepository {
       ));
     }
   }
-  
+
   @override
   ResultFuture<void> forgetPassword(String email) async {
-   try {
-     final result = await _remoteDataSource.forgetPassword(email);
-     return Right(result);
-   }on ServerException catch (e) {
-     return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
-   }
+    try {
+      final result = await _remoteDataSource.forgetPassword(email);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message, statusCode: e.statusCode));
+    }
   }
 }
