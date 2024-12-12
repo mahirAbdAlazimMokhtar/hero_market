@@ -1,4 +1,5 @@
 part of 'router.dart';
+
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   navigatorKey: rootNavigatorKey,
@@ -27,7 +28,10 @@ final router = GoRouter(
         if (cacheHelper.isFirstTime()) {
           return const OnBoardingScreen();
         }
-        return const SplashScreen();
+        return BlocProvider(
+          create: (_) => sl<AuthCubit>(),
+          child: const SplashScreen(),
+        );
       },
     ),
     GoRoute(path: LoginScreen.path, builder: (_, __) => const LoginScreen()),
