@@ -22,9 +22,7 @@ abstract class AuthRemoteDataSource {
     required String password,
     required String name,
     required String phone,
-  });
-
-  Future<UserModel> login({
+  });  Future<UserModel> login({
     required String email,
     required String password,
   });
