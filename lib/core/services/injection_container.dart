@@ -13,4 +13,6 @@ import '../../src/auth/domain_layer/usecases/verify_token.dart';
 import '../common/app/cache_helper.dart';
 import 'package:http/http.dart' as http;
 
+import '../common/app/providers/user_provider.dart';
+
 part 'injection_container.main.dart';

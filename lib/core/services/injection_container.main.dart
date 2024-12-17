@@ -25,6 +25,7 @@ Future<void> _authInit() async {
         resetPassword: sl(),
         verifyOtp: sl(),
         verifyToken: sl(),
+        userProvider: sl(),
       ),
     )
     ..registerLazySingleton(() => ForgotPassword(sl()))
@@ -37,5 +38,6 @@ Future<void> _authInit() async {
         () => AuthRepositoryImplementation(sl()))
     ..registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImplementation(sl()))
+    ..registerLazySingleton(() => UserProvider.instance)
     ..registerLazySingleton(http.Client.new);
 }

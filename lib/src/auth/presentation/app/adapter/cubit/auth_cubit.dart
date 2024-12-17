@@ -21,12 +21,14 @@ class AuthCubit extends Cubit<AuthState> {
     required ResetPassword resetPassword,
     required VerifyOtp verifyOtp,
     required VerifyToken verifyToken,
+    required UserProvider userProvider,
   })  : _forgetPassword = forgotPassword,
         _login = login,
         _register = register,
         _resetPassword = resetPassword,
         _verifyOtp = verifyOtp,
         _verifyToken = verifyToken,
+        _userProvider = userProvider ,
         super(AuthInitial());
 
   final ForgotPassword _forgetPassword;
@@ -35,12 +37,13 @@ class AuthCubit extends Cubit<AuthState> {
   final ResetPassword _resetPassword;
   final VerifyOtp _verifyOtp;
   final VerifyToken _verifyToken;
+  final UserProvider _userProvider;
 
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
     final result = await _login(LoginParams(email: email, password: password));
     result.fold((failure) => emit(AuthError(failure.errorMessage)), (user) {
-      UserProvider.instance.setUser(user);
+      _userProvider.setUser(user);
       emit(LoggedIn(user));
     });
   }
@@ -78,11 +81,11 @@ class AuthCubit extends Cubit<AuthState> {
         ResetPasswordParams(email: email, newPassword: newPassword));
     result.fold(
       (failure) => emit(AuthError(failure.errorMessage)),
-      (_)=> emit(const PasswordReset()),
+      (_) => emit(const PasswordReset()),
     );
   }
 
-  Future<void> verifyOtp({required String email, required String otp})async {
+  Future<void> verifyOtp({required String email, required String otp}) async {
     emit(AuthLoading());
     final result = await _verifyOtp(VerifyOtpParams(email: email, otp: otp));
     result.fold((failure) => emit(AuthError(failure.errorMessage)),
@@ -92,13 +95,11 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> verifyToken() async {
     emit(AuthLoading());
     final result = await _verifyToken();
-    result.fold((failure) => emit(AuthError(failure.errorMessage)),
-        (isValid) {
-          emit( TokenVerified(isValid));
-          if(!isValid){
-            UserProvider.instance.setUser(null);
-          }
-        });
+    result.fold((failure) => emit(AuthError(failure.errorMessage)), (isValid) {
+      emit(TokenVerified(isValid));
+      if (!isValid) {
+        _userProvider.setUser(null);
+      }
+    });
   }
 }
-

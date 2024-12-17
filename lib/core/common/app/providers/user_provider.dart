@@ -10,9 +10,15 @@ class UserProvider extends ChangeNotifier {
   User? get currentUSer => _currentUser;
 
   void setUser(User? user) {
-  if(_currentUser != user) {
-    _currentUser = user;
-  }
+    if (_currentUser != user) {
+      _currentUser = user;
+    }
   }
 
+  void updateUser(User user) {
+    //if condition
+    if (_currentUser != user) {
+      _currentUser = user;
+    }
+  }
 }
