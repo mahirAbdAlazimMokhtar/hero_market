@@ -28,8 +28,11 @@ final router = GoRouter(
         if (cacheHelper.isFirstTime()) {
           return const OnBoardingScreen();
         }
-        return BlocProvider(
-          create: (_) => sl<AuthCubit>(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<AuthCubit>()),
+            BlocProvider(create: (_) => sl<AuthUserCubit>()),
+          ],
           child: const SplashScreen(),
         );
       },
