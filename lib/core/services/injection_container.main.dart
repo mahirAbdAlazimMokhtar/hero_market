@@ -5,6 +5,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   _cacheInit();
   _authInit();
+  _userInit();
 }
 
 Future<void> _cacheInit() async {
@@ -13,6 +14,21 @@ Future<void> _cacheInit() async {
   sl
     ..registerLazySingleton(() => CacheHelper(sl()))
     ..registerLazySingleton(() => prefs);
+}
+
+Future<void> _userInit() async {
+  sl
+    ..registerFactory(() => AuthUserCubit(
+        getUser: sl(),
+        getUserPaymentProfile: sl(),
+        updateUser: sl(),
+        userProvider: sl()))
+    ..registerLazySingleton(() => GetUser(sl()))
+    ..registerLazySingleton(() => GetUserPaymentProfile(sl()))
+    ..registerLazySingleton(() => UpdateUser(sl()))
+    ..registerLazySingleton<UserRepo>(() => UserRepositoryImplementation(sl()))
+    ..registerLazySingleton<UserRemoteDataSource>(
+        () => UserRemoteDataSourceImplementation(sl()));
 }
 
 Future<void> _authInit() async {
