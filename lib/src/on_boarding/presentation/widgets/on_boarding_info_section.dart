@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hero_market/core/common/widgets/rounded_button.dart';
 
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
 
 import 'package:hero_market/core/resources/media/media.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
+import 'package:hero_market/core/services/router.dart';
+
+import '../../../../core/common/app/cache_helper.dart';
+import '../../../../core/services/injection_container.dart';
+import '../../../auth/presentation/screens/login_screen.dart';
 
 class OnBoardingInfoSection extends StatelessWidget {
   const OnBoardingInfoSection.first({super.key}) : first = true;
@@ -19,9 +26,9 @@ class OnBoardingInfoSection extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Image.asset(first ? Media.onBoardingFemale : Media.onBoardingMale),
+          child: Image.asset(
+              first ? Media.onBoardingFemale : Media.onBoardingMale),
         ),
-       
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -55,7 +62,15 @@ class OnBoardingInfoSection extends StatelessWidget {
                                 color: AppColors.classicAdaptiveTextColor(
                                     context)))
                       ]))
-            }
+            },
+            RoundedButton(
+              text: 'Get Started',
+              
+              onPressed: () {
+                sl<CacheHelper>().cacheFirstTimer();
+                context.go(LoginScreen.path);
+              },
+            ),
           ],
         )
       ],

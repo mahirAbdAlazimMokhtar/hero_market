@@ -3,7 +3,7 @@ part of 'router.dart';
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   navigatorKey: rootNavigatorKey,
-  debugLogDiagnostics: kDebugMode,
+  debugLogDiagnostics: true,
   //First screen
   initialLocation: '/',
   routes: [
@@ -38,6 +38,7 @@ final router = GoRouter(
       },
     ),
     GoRoute(path: LoginScreen.path, builder: (_, __) => const LoginScreen()),
+    
     ShellRoute(
       routes: [
         GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
