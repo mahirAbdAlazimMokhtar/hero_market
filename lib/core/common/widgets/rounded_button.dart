@@ -20,25 +20,28 @@ class RoundedButton extends StatelessWidget {
   final Color? color;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height ?? 66,
-      width: double.maxFinite,
-      child: FilledButton(
-        onPressed: () {
-          // hide keyboard
-          FocusManager.instance.primaryFocus?.unfocus();
-          onPressed?.call();
-        },
-        style: FilledButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: height ?? 66,
+        width: double.maxFinite,
+        child: FilledButton(
+          onPressed: () {
+            // hide keyboard
+            FocusManager.instance.primaryFocus?.unfocus();
+            onPressed?.call();
+          },
+          style: FilledButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            backgroundColor: color,
+            padding: padding,
           ),
-          backgroundColor: color,
-          padding: padding,
-        ),
-        child: Text(
-          text,
-          style: style ?? AppTextStyles.buttonTextHeadingSemiBold.white,
+          child: Text(
+            text,
+            style: style ?? AppTextStyles.buttonTextHeadingSemiBold.white,
+          ),
         ),
       ),
     );

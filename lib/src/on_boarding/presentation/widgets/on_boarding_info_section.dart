@@ -65,7 +65,6 @@ class OnBoardingInfoSection extends StatelessWidget {
             },
             RoundedButton(
               text: 'Get Started',
-              
               onPressed: () {
                 sl<CacheHelper>().cacheFirstTimer();
                 context.go(LoginScreen.path);
