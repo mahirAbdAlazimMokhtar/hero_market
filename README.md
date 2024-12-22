@@ -26,12 +26,13 @@ Welcome to the Hero Market app! This project is built with Flutter to provide a 
 ---
 
 ## 🔑 Login UI  
+![Dark Mode Login UI](https://github.com/user-attachments/assets/7a0dfef0-53a0-4c7b-b271-1495ab73457c)
 
-![Login Screenshot 1](https://github.com/user-attachments/assets/7189c228-a01d-4a16-9fbb-e5c7f02f331a)  
 
 &nbsp;  
 
-![Login Screenshot 2](https://github.com/user-attachments/assets/c092be1a-0f9d-40a4-8e07-b4ce4cd7c2a4)
+![Login Light Mode](https://github.com/user-attachments/assets/5dd19821-13fa-435c-b58e-7eb5487d02fe)
+
 
 ---
 
