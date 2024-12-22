@@ -50,12 +50,52 @@ Welcome to the Hero Market app! This project is built with Flutter to provide a 
 ```plaintext
 lib/
 ├── main.dart
-├── screens/
-│   ├── onboarding_screen.dart
-│   ├── login_screen.dart
-├── widgets/
-│   ├── custom_button.dart
-│   ├── custom_textfield.dart
-├── utils/
-│   ├── theme.dart
-│   ├── constants.dart
+├── core/
+│   ├── utils/
+│   │   ├── constants.dart
+│   │   ├── theme.dart
+│   ├── error/
+│   │   ├── exceptions.dart
+│   │   ├── failures.dart
+│   ├── usecases/
+│       ├── usecase.dart
+├── features/
+│   ├── onboarding/
+│   │   ├── presentation/
+│   │   │   ├── pages/
+│   │   │   │   ├── onboarding_screen.dart
+│   │   │   ├── widgets/
+│   │   │       ├── onboarding_widget.dart
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   ├── onboarding_entity.dart
+│   │   │   ├── usecases/
+│   │   │       ├── get_onboarding_data.dart
+│   │   ├── data/
+│   │       ├── models/
+│   │       │   ├── onboarding_model.dart
+│   │       ├── repositories/
+│   │           ├── onboarding_repository_impl.dart
+│   │       ├── datasources/
+│   │           ├── onboarding_remote_datasource.dart
+│   │           ├── onboarding_local_datasource.dart
+│   ├── login/
+│       ├── presentation/
+│       │   ├── pages/
+│       │   │   ├── login_screen.dart
+│       │   ├── widgets/
+│       │       ├── login_form.dart
+│       ├── domain/
+│       │   ├── entities/
+│       │   │   ├── login_entity.dart
+│       │   ├── usecases/
+│       │       ├── login_user.dart
+│       ├── data/
+│           ├── models/
+│           │   ├── login_model.dart
+│           ├── repositories/
+│           │   ├── login_repository_impl.dart
+│           ├── datasources/
+│               ├── login_remote_datasource.dart
+│               ├── login_local_datasource.dart
+
