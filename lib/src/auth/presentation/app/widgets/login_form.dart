@@ -3,7 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hero_market/core/common/widgets/rounded_button.dart';
 import 'package:hero_market/core/common/widgets/vertical_label_field.dart';
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
-import 'package:hero_market/core/extensions/widgets_extenesions.dart';
+import 'package:hero_market/core/extensions/widgets_extensions.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
 
 import '../../../../../core/resources/styles/colors.dart';
@@ -54,8 +54,8 @@ class _LoginFormState extends State<LoginForm> {
                   onTap: () => obscurePasswordNotifier.value = !obscurePassword,
                   child: Icon(
                     obscurePassword
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
                     color: AppColors.lightThemeSecondaryTextColor,
                   ),
                 ),
