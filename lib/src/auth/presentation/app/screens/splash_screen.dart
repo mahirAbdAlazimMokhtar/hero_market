@@ -8,7 +8,7 @@ import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 import 'package:hero_market/src/user/app/adapter/cubit/auth_user_cubit.dart';
 
-import '../../../../core/services/injection_container.dart';
+import '../../../../../core/services/injection_container.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -11,7 +11,7 @@ import 'package:hero_market/core/services/router.dart';
 
 import '../../../../core/common/app/cache_helper.dart';
 import '../../../../core/services/injection_container.dart';
-import '../../../auth/presentation/screens/login_screen.dart';
+import '../../../auth/presentation/app/screens/login_screen.dart';
 
 class OnBoardingInfoSection extends StatelessWidget {
   const OnBoardingInfoSection.first({super.key}) : first = true;
