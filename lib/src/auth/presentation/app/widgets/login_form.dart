@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hero_market/core/common/widgets/rounded_button.dart';
 import 'package:hero_market/core/common/widgets/vertical_label_field.dart';
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
@@ -7,6 +8,7 @@ import 'package:hero_market/core/extensions/widgets_extensions.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
 
 import '../../../../../core/resources/styles/colors.dart';
+import '../screens/forgot_password_screen.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -68,7 +70,9 @@ class _LoginFormState extends State<LoginForm> {
             child: Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  context.go(ForgotPasswordScreen.path);
+                },
                 child: Text(
                   'Forgot Password?',
                   style: AppTextStyles.paragraphSubTextRegular1
