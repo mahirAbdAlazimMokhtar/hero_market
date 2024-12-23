@@ -62,7 +62,7 @@ class VerticalLabelField extends StatelessWidget {
               flex: prefixFlex,
               child: prefix!,
             ),
-            const Gap(8)
+            const Gap(20)
           },
           Expanded(
             child: InputField(
