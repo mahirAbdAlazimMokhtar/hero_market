@@ -81,6 +81,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
             keyboardType: TextInputType.name,
           ),
           Gap(20),
+           VerticalLabelField(
+            label: 'Email',
+            controller: emailController,
+            hintText: 'Enter your Email',
+            keyboardType: TextInputType.emailAddress,
+          ),
+          Gap(30),
           ValueListenableBuilder(
             valueListenable: countryNotifier,
             builder: (context, country, __) {
@@ -181,7 +188,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   ),
                 ),
                 validator: (value) {
-                  if (value != confirmPasswordController.text.trim()) {
+                  if (value != passwordController.text.trim()) {
                     return 'Password does not match';
                   }
                   return null;
