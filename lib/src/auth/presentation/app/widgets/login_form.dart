@@ -82,7 +82,10 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           const Gap(40),
-          RoundedButton(text: 'Sign In', onPressed: () {}).loading(false),
+          RoundedButton(text: 'Sign In', onPressed: () {
+            if (formKey.currentState!.validate()) {}
+            
+          }).loading(false),
         ],
       ),
     );
