@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hero_market/core/extensions/widgets_extensions.dart';
+import 'package:hero_market/src/auth/presentation/app/screens/verify_otp_screen.dart';
 
 import '../../../../../core/common/widgets/rounded_button.dart';
 import '../../../../../core/common/widgets/vertical_label_field.dart';
@@ -41,11 +42,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             text: 'Continue',
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                // TODO(Forgot-Password): Implement Email Submission here
-                // context.push(
-                //   VerifyOTPScreen.path,
-                //   extra: emailController.text.trim(),
-                // );
+                context.go(VerifyOtpScreen.path, extra: emailController.text.trim());
               }
             },
           ).loading(false),
