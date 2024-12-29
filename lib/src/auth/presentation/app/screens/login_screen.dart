@@ -54,9 +54,10 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.lightThemePrimaryColor,
                   ),
-                  recognizer: TapGestureRecognizer()..onTap = () {
-                    context.go(RegisterScreen.path);
-                  },
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      context.go(RegisterScreen.path);
+                    },
                 )
               ]),
         ),
