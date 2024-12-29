@@ -49,7 +49,7 @@ Welcome to the Hero Market app! This project is built with Flutter to provide a 
 
 &nbsp;
 
-## 🛡️ Field Validation: Ensure Fields Are Not Empty 
+## 🛡️ Field Validation: Ensure Fields Are Not Empty
 
 📋 Key Features
 Dynamic Error Messages:
@@ -83,6 +83,40 @@ This Password Mismatch Validation feature ensures a smoother and error-free expe
 ![Simulator Screenshot - iPhone 16 Plus - 2024-12-23 at 21 37 36](https://github.com/user-attachments/assets/1b8b92da-da23-4b70-92de-ad7f9000da95)
 
 ---
+&nbsp;
+
+🚀 Forgot Password Feature :-
+
+🔒 Secure Email Verification
+Sends a One-Time Password (OTP) to the user’s registered email to confirm their identity.
+
+⏱ Countdown Timer
+
+Displays a timer to indicate the time remaining for OTP expiration, preventing multiple unnecessary requests.
+
+🔄 Resend OTP
+
+Allows users to resend a new OTP after the timer expires, with increasing intervals to enhance security.
+
+🌟 Responsive & Intuitive UI
+
+Offers a seamless user experience with clear instructions and real-time feedback.
+
+Confirm Your Eamil
+
+![Simulator Screenshot - iPhone 16 Plus - 2024-12-24 at 21 13 38](https://github.com/user-attachments/assets/cd4e1a6e-79ef-45c5-a175-03eadfaaf042)
+
+Verification OTP CODE
+
+![Simulator Screenshot - iPhone 16 Plus - 2024-12-24 at 21 13 45](https://github.com/user-attachments/assets/4699964c-225c-4811-9b4f-17dca60999f3)
+
+Countdown Timer
+
+![Simulator Screenshot - iPhone 16 Plus - 2024-12-24 at 21 13 55](https://github.com/user-attachments/assets/125e3419-d42a-4e12-84be-fecc05dce18b)
+
+Resend OTP Button
+
+![Simulator Screenshot - iPhone 16 Plus - 2024-12-24 at 21 14 45](https://github.com/user-attachments/assets/0e651c23-b719-41c3-aae0-ef8cff9443f2)
 
 ## 📚 Features
 
