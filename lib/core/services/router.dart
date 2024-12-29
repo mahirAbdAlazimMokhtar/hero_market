@@ -9,6 +9,7 @@ import 'package:hero_market/src/auth/presentation/app/screens/forgot_password_sc
 import 'package:hero_market/src/auth/presentation/app/screens/login_screen.dart';
 import 'package:hero_market/src/auth/presentation/app/screens/register_screen.dart';
 import 'package:hero_market/src/auth/presentation/app/screens/splash_screen.dart';
+import 'package:hero_market/src/auth/presentation/app/screens/verify_otp_screen.dart';
 import 'package:hero_market/src/dashboard/presentation/views/dashboard_screen.dart';
 import 'package:hero_market/src/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:hero_market/src/user/app/adapter/cubit/auth_user_cubit.dart';

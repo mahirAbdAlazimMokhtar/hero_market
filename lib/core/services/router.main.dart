@@ -38,9 +38,14 @@ final router = GoRouter(
       },
     ),
     GoRoute(path: LoginScreen.path, builder: (_, __) => const LoginScreen()),
-    GoRoute(path: RegisterScreen.path, builder: (_, __) => const RegisterScreen()),
-    GoRoute(path: ForgotPasswordScreen.path, builder: (_, __) => const ForgotPasswordScreen()),
-    
+    GoRoute(
+        path: RegisterScreen.path, builder: (_, __) => const RegisterScreen()),
+    GoRoute(
+        path: ForgotPasswordScreen.path,
+        builder: (_, __) => const ForgotPasswordScreen()),
+    GoRoute(
+        path: VerifyOtpScreen.path,
+        builder: (_, state) => VerifyOtpScreen(email: state.extra as String)),
     ShellRoute(
       routes: [
         GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
