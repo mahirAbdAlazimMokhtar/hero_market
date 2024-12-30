@@ -1,27 +1,27 @@
 # 🛒 Hero Market
 
-**A new Flutter project.**  
+**A new Flutter project.**
 Welcome to the Hero Market app! This project is built with Flutter to provide a seamless user experience in both light and dark modes. 🚀
 
 ---
 
 ## 🚀 Getting Started
 
-### OnBoarding Screen  
+### OnBoarding Screen
 
-#### 🌞 Light Mode  
+#### 🌞 Light Mode
 
-![Light Mode Screenshot 1](https://github.com/user-attachments/assets/ea2330db-7481-40a8-9fbb-7fa21d74b0b3)  
+![Light Mode Screenshot 1](https://github.com/user-attachments/assets/ea2330db-7481-40a8-9fbb-7fa21d74b0b3)
 
-&nbsp;  
+&nbsp;
 
 ![Light Mode Screenshot 2](https://github.com/user-attachments/assets/5b2ed580-e5eb-4a29-90ec-92aea5676075)
 
-#### 🌙 Dark Mode  
+#### 🌙 Dark Mode
 
-![Dark Mode Screenshot 1](https://github.com/user-attachments/assets/e835cc58-0a0a-4a8c-bae0-9e8ff7cced94)  
+![Dark Mode Screenshot 1](https://github.com/user-attachments/assets/e835cc58-0a0a-4a8c-bae0-9e8ff7cced94)
 
-&nbsp;  
+&nbsp;
 
 ![Dark Mode Screenshot 2](https://github.com/user-attachments/assets/4adf39db-b1a9-49e0-8790-df4019aa0d15)
 
@@ -31,19 +31,19 @@ Welcome to the Hero Market app! This project is built with Flutter to provide a 
 
 ![Dark Mode Login UI](https://github.com/user-attachments/assets/7a0dfef0-53a0-4c7b-b271-1495ab73457c)
 
-&nbsp;  
+&nbsp;
 
 ![Login Light Mode](https://github.com/user-attachments/assets/5dd19821-13fa-435c-b58e-7eb5487d02fe)
 
 &nbsp;
 
-## 🔑 Register Screen UI  
+## 🔑 Register Screen UI
 
 ![Register Screen](https://github.com/user-attachments/assets/a768c1f2-4808-4ad8-aa4b-1dff40ac1b2c)
 
 &nbsp;
 
-## 🔑 Confirm Email (Forgot Password) Screen UI  
+## 🔑 Confirm Email (Forgot Password) Screen UI
 
 ![Confirm Email Screen](https://github.com/user-attachments/assets/f0c06c7d-4178-4272-be82-05174f82c062)
 
@@ -83,6 +83,7 @@ This Password Mismatch Validation feature ensures a smoother and error-free expe
 ![Simulator Screenshot - iPhone 16 Plus - 2024-12-23 at 21 37 36](https://github.com/user-attachments/assets/1b8b92da-da23-4b70-92de-ad7f9000da95)
 
 ---
+
 &nbsp;
 
 🚀 Forgot Password Feature :-
@@ -117,6 +118,18 @@ Countdown Timer
 Resend OTP Button
 
 ![Simulator Screenshot - iPhone 16 Plus - 2024-12-24 at 21 14 45](https://github.com/user-attachments/assets/0e651c23-b719-41c3-aae0-ef8cff9443f2)
+
+&nbsp;
+
+## 🚀 Added Reset Password Feature
+
+The **Reset Password** functionality enhances user security and experience by providing:
+
+- **Secure OTP-based Email Verification**
+- **Dynamic Countdown Timer**
+- **Intuitive Resend OTP Mechanism**
+
+  ![Simulator Screenshot - iPhone 16 Plus - 2024-12-30 at 10 48 22](https://github.com/user-attachments/assets/16ef516b-5590-475d-8d1c-2b41ad808b04)
 
 ## 📚 Features
 
@@ -185,3 +198,4 @@ lib/
 │               ├── login_remote_datasource.dart
 │               ├── login_local_datasource.dart
 
+```
