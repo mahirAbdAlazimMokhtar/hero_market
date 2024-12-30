@@ -44,8 +44,25 @@ final router = GoRouter(
         path: ForgotPasswordScreen.path,
         builder: (_, __) => const ForgotPasswordScreen()),
     GoRoute(
-        path: VerifyOtpScreen.path,
-        builder: (_, state) => VerifyOtpScreen(email: state.extra as String)),
+      path: ResetPasswordScreen.path,
+      builder: (_, state) {
+        final email = state.extra as String?;
+        if (email == null) {
+          return ErrorScreen(message: 'Email is required');
+        }
+        return ResetPasswordScreen(email: email);
+      },
+    ),
+    GoRoute(
+      path: VerifyOtpScreen.path,
+      builder: (_, state) {
+        final email = state.extra as String?;
+        if (email == null) {
+          return ErrorScreen(message: 'Email is required');
+        }
+        return VerifyOtpScreen(email: email);
+      },
+    ),
     ShellRoute(
       routes: [
         GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),

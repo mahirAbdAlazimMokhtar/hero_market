@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hero_market/core/common/widgets/rounded_button.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
 import 'package:hero_market/core/extensions/widgets_extensions.dart';
 import 'package:hero_market/core/utils/core_utils.dart';
+import 'package:hero_market/src/auth/presentation/app/screens/reset_password_screen.dart';
 import 'package:hero_market/src/auth/presentation/app/widgets/otp_timer.dart';
 
 import '../../../../../core/common/widgets/app_bar_bottom.dart';
@@ -63,7 +65,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               if(otpController.text.length < 4){
                 CoreUtils.showSnackBar(context, message: 'Invalid OTP');
               }else{
-                
+                context.pushReplacement(ResetPasswordScreen.path,extra: widget.email);
               }
             },
           ).loading(false)
