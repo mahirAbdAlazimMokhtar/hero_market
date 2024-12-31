@@ -22,31 +22,31 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     context.read<AuthCubit>().verifyToken();
-
   }
-Future<void> redirectToIndex()async{
-   final router = GoRouter.of(context);
-              await sl<CacheHelper>().resetSession();
-              router.go('/');
-}
+
+  Future<void> redirectToIndex() async {
+    final router = GoRouter.of(context);
+    await sl<CacheHelper>().resetSession();
+    router.go('/');
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthUserCubit, AuthUserState>(
       listener: (context, state) async {
         if (state is AuthUserError) {
-          sl<CacheHelper>().resetSession();
           await redirectToIndex();
-        } else {
+        } else if (state is FetchedUser) {
           context.go('/', extra: 'home');
         }
       },
-      child: BlocListener(
+      child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) async {
           if (state is TokenVerified) {
             if (state.isValid) {
               context.read<AuthUserCubit>().getUserById(Cache.instance.userId!);
             } else {
-             await redirectToIndex();
+              await redirectToIndex();
             }
           } else if (state is AuthError) {
             await redirectToIndex();
