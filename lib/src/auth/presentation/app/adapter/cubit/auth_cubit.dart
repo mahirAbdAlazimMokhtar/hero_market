@@ -28,7 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
         _resetPassword = resetPassword,
         _verifyOtp = verifyOtp,
         _verifyToken = verifyToken,
-        _userProvider = userProvider ,
+        _userProvider = userProvider,
         super(AuthInitial());
 
   final ForgotPassword _forgetPassword;
@@ -51,15 +51,15 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> register({
     required String email,
     required String password,
-    required String name,
-    required String phone,
+    required String fullName,
+    required String phoneNumber,
   }) async {
     emit(AuthLoading());
     final result = await _register(RegisterParams(
       email: email,
       password: password,
-      name: name,
-      phone: phone,
+      fullName: fullName,
+      userPhoneNumber: phoneNumber,
     ));
     result.fold(
       (failure) => emit(AuthError(failure.errorMessage)),
