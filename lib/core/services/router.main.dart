@@ -37,9 +37,18 @@ final router = GoRouter(
         );
       },
     ),
-    GoRoute(path: LoginScreen.path, builder: (_, __) => const LoginScreen()),
     GoRoute(
-        path: RegisterScreen.path, builder: (_, __) => const RegisterScreen()),
+        path: LoginScreen.path,
+        builder: (_, __) => BlocProvider(
+              create: (_) => sl<AuthCubit>(),
+              child: LoginScreen(),
+            )),
+    GoRoute(
+        path: RegisterScreen.path,
+        builder: (_, __) => BlocProvider(
+              create: (_) => sl<AuthCubit>(),
+              child: const RegisterScreen(),
+            )),
     GoRoute(
         path: ForgotPasswordScreen.path,
         builder: (_, __) => const ForgotPasswordScreen()),
