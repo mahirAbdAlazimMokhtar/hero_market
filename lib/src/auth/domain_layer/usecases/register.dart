@@ -14,8 +14,8 @@ class Register extends UsecasesWithParams<void, RegisterParams> {
     return _repository.registerUser(
         email: params.email,
         password: params.password,
-        name: params.name,
-        phone: params.phone);
+        name: params.fullName,
+        phone: params.userPhoneNumber);
   }
 }
 
@@ -23,20 +23,20 @@ class RegisterParams extends Equatable {
   const RegisterParams(
       {required this.email,
       required this.password,
-      required this.name,
-      required this.phone});
+      required this.fullName,
+      required this.userPhoneNumber});
 
   final String email;
   final String password;
-  final String name;
-  final String phone;
+  final String fullName;
+  final String userPhoneNumber;
 
   const RegisterParams.empty()
       : email = 'Test String Email',
         password = 'Test String Password',
-        name = 'Test String Name',
-        phone = 'Test String Phone';
+        fullName = 'Test String Name',
+        userPhoneNumber = 'Test String Phone';
 
   @override
-  List<dynamic> get props => [email, password, name, phone];
+  List<dynamic> get props => [email, password, fullName, userPhoneNumber];
 }
