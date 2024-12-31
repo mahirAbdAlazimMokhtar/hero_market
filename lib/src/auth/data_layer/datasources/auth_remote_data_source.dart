@@ -22,7 +22,8 @@ abstract class AuthRemoteDataSource {
     required String password,
     required String name,
     required String phone,
-  });  Future<UserModel> login({
+  });
+  Future<UserModel> login({
     required String email,
     required String password,
   });
@@ -88,7 +89,7 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
       final uri = Uri.parse('${NetworkConstants.baseUrl}$LOGIN_ENDPOINT');
       final response = await _httpClient.post(
         uri,
-        body: jsonEncode({'email': email, 'password': password}),
+        body: jsonEncode({'password': password, 'email': email}),
         headers: NetworkConstants.headers,
       );
       final payload = jsonDecode(response.body) as DataMap;
