@@ -67,13 +67,17 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> forgetPassword(String email) async {
-    emit(AuthLoading());
-    final result = await _forgetPassword(email);
-    result.fold((failure) => emit(AuthError(failure.errorMessage)),
-        (_) => emit(const OTPSent()));
-  }
 
+
+
+  Future<void> forgotPassword({required String email}) async {
+    emit(const AuthLoading());
+    final result = await _forgetPassword(email);
+    result.fold(
+      (failure) => emit(AuthError(failure.errorMessage)),
+      (_) => emit(const OTPSent()),
+    );
+  }
   Future<void> resetPassword(
       {required String email, required String newPassword}) async {
     emit(AuthLoading());
