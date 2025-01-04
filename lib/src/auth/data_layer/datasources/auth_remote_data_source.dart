@@ -28,7 +28,7 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
 
-  Future<void> forgetPassword(String email);
+  Future<void> forgotPassword(String email);
 
   Future<void> verifyOtp({required String email, required String otp});
 
@@ -42,7 +42,7 @@ abstract class AuthRemoteDataSource {
 ///
 const REGISTER_ENDPOINT = "/register";
 const LOGIN_ENDPOINT = "/login";
-const FORGET_PASSWORD_ENDPOINT = "/forget-password";
+const FORGOT_PASSWORD_ENDPOINT = "/forgot-password";
 const VERIFY_OTP_ENDPOINT = "/verify-otp";
 const RESET_PASSWORD_ENDPOINT = "/reset-password";
 const VERIFY_TOKEN_ENDPOINT = "/verify-token";
@@ -52,31 +52,35 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
 
   AuthRemoteDataSourceImplementation(this._httpClient);
   @override
-  Future<void> forgetPassword(String email) async {
+  Future<void> forgotPassword(String email) async {
     try {
-      final uri =
-          Uri.parse('${NetworkConstants.baseUrl}$FORGET_PASSWORD_ENDPOINT');
+      final uri = Uri.parse(
+        '${NetworkConstants.baseUrl}$FORGOT_PASSWORD_ENDPOINT',
+      );
+
       final response = await _httpClient.post(
         uri,
         body: jsonEncode({'email': email}),
         headers: NetworkConstants.headers,
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode != 200) {
         final payload = jsonDecode(response.body) as DataMap;
         final errorResponse = ErrorResponse.fromMap(payload);
         throw ServerException(
-            message: errorResponse.errorMessage,
-            statusCode: response.statusCode);
+          message: errorResponse.errorMessage,
+          statusCode: response.statusCode,
+        );
       }
     } on ServerException {
       rethrow;
     } catch (e, s) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: s);
-      throw ServerException(
-          message: "Mahir :--- Error Occurred : It's not you, it's us",
-          statusCode: 500);
+      throw const ServerException(
+        message: "Error Occurred: It's not your fault, it's ours",
+        statusCode: 500,
+      );
     }
   }
 
