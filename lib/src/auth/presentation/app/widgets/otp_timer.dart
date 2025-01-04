@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
+import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 
 import '../../../../../core/resources/styles/colors.dart';
 
@@ -25,7 +27,6 @@ class _OTPTimerState extends State<OTPTimer> {
   Timer? _timer;
 
   bool canResend = false;
-  bool resending = false;
 
   @override
   void initState() {
@@ -68,47 +69,49 @@ class _OTPTimerState extends State<OTPTimer> {
     final minutes = _duration ~/ 60;
     final seconds = _duration.remainder(60);
 
-    return Center(
-        child: switch (canResend) {
-      true => switch (resending) {
-          true => const CircularProgressIndicator.adaptive(
-              backgroundColor:AppColors.lightThemePrimaryColor,
-            ),
-          _ => TextButton(
-              onPressed: () async {
-                setState(() {
-                  resending = true;
-                });
-                // TODO(Resend-OTP): Implement OTP resend
-                setState(() {
-                  resending = false;
-                });
-                _startTimer();
-                setState(() {
-                  canResend = false;
-                });
-              },
-              child: Text(
-                'Resend Code',
-                style: AppTextStyles.headingMedium4.primary,
-              ),
-            ),
-        },
-      _ => RichText(
-          text: TextSpan(
-            text: 'Resend code in ',
-            style: AppTextStyles.headingMedium4.grey,
-            children: [
-              TextSpan(
-                text: '$minutes:${seconds.toString().padLeft(2, '0')}',
-                style: const TextStyle(
-                  color: AppColors.lightThemePrimaryColor,
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context,state){
+        if(state is OTPSent){
+          _startTimer();
+          setState(() {
+            canResend = false;
+          });
+        }
+      },
+      builder: (context, state) {
+        return Center(
+            child: switch (canResend) {
+          true => switch (state) {
+              AuthLoading _ => const SizedBox.shrink(),
+              _ => TextButton(
+                  onPressed: () async {
+                    context
+                        .read<AuthCubit>()
+                        .forgotPassword(email: widget.email);
+                  },
+                  child: Text(
+                    'Resend Code',
+                    style: AppTextStyles.headingMedium4.primary,
+                  ),
                 ),
+            },
+          _ => RichText(
+              text: TextSpan(
+                text: 'Resend code in ',
+                style: AppTextStyles.headingMedium4.grey,
+                children: [
+                  TextSpan(
+                    text: '$minutes:${seconds.toString().padLeft(2, '0')}',
+                    style: const TextStyle(
+                      color: AppColors.lightThemePrimaryColor,
+                    ),
+                  ),
+                  const TextSpan(text: ' seconds'),
+                ],
               ),
-              const TextSpan(text: ' seconds'),
-            ],
-          ),
-        ),
-    });
+            ),
+        });
+      },
+    );
   }
 }
