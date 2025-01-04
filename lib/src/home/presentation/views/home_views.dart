@@ -6,6 +6,13 @@ class HomeViews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home')),
+      body: Placeholder(
+        child: Center(
+          child: Text('To Be Continued...'),
+        ),
+      ),
+    );
   }
 }
