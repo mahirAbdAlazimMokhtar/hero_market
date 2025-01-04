@@ -84,7 +84,7 @@ class _LoginFormState extends State<LoginForm> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      context.go(ForgotPasswordScreen.path);
+                      context.push(ForgotPasswordScreen.path);
                     },
                     child: Text(
                       'Forgot Password?',
