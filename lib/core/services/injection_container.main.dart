@@ -3,13 +3,9 @@ part of 'injection_container.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  final prefs = await SharedPreferences.getInstance();
-  sl
-    ..registerLazySingleton(() => CacheHelper(sl()))
-    ..registerLazySingleton(() => prefs);
-
-  _authInit();
-  _userInit();
+  await _cacheInit();
+  await _authInit();
+  await _userInit();
 }
 
 Future<void> _userInit() async {
@@ -53,6 +49,7 @@ Future<void> _authInit() async {
     ..registerLazySingleton(() => UserProvider.instance)
     ..registerLazySingleton(http.Client.new);
 }
+
 
 Future<void> _cacheInit() async {
   final prefs = await SharedPreferences.getInstance();
