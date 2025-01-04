@@ -99,7 +99,7 @@ class AuthRepositoryImplementation implements AuthRepository {
   @override
   ResultFuture<void> forgetPassword(String email) async {
     try {
-      final result = await _remoteDataSource.forgetPassword(email);
+      final result = await _remoteDataSource.forgotPassword(email);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message, statusCode: e.statusCode));

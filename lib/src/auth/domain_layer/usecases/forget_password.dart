@@ -4,12 +4,10 @@ import '../../../../core/usecase/usecase.dart';
 import '../repositories/auth_repository.dart';
 
 class ForgotPassword extends UsecasesWithParams<void, String> {
-  final AuthRepository _repository;
+  const ForgotPassword(this._repo);
 
-  ForgotPassword(this._repository);
+  final AuthRepository _repo;
 
   @override
-  ResultFuture<void> call(String params) {
-    return _repository.forgetPassword(params);
-  }
+  ResultFuture<void> call(String params) => _repo.forgetPassword(params);
 }
