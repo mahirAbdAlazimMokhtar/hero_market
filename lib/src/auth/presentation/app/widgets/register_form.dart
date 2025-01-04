@@ -14,7 +14,6 @@ import 'package:hero_market/core/utils/core_utils.dart';
 import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 
 import '../../../../../core/resources/styles/colors.dart';
-import '../screens/forgot_password_screen.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
@@ -216,23 +215,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     },
                   );
                 },
-              ),
-              const Gap(20),
-              SizedBox(
-                width: double.maxFinite,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.go(ForgotPasswordScreen.path);
-                    },
-                    child: Text(
-                      'Forgot Password?',
-                      style: AppTextStyles.paragraphSubTextRegular1
-                          .adaptiveColor(context),
-                    ),
-                  ),
-                ),
               ),
               const Gap(40),
               RoundedButton(
