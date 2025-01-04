@@ -76,6 +76,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
         if (state case AuthError(:final message)) {
           CoreUtils.showSnackBar(context, message: message);
         } else if (state is Registered) {
+          CoreUtils.showSnackBar(context, message: 'Registered Successfully ✅');
           context.go('/');
         }
       },
