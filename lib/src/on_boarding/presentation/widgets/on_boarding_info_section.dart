@@ -7,7 +7,6 @@ import 'package:hero_market/core/extensions/text_style_extensions.dart';
 import 'package:hero_market/core/resources/media/media.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
-import 'package:hero_market/core/services/router.dart';
 
 import '../../../../core/common/app/cache_helper.dart';
 import '../../../../core/services/injection_container.dart';
