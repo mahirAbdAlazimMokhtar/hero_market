@@ -6,71 +6,73 @@ final router = GoRouter(
   debugLogDiagnostics: true,
   //First screen
   initialLocation: '/',
-  routes: [
+ routes: [
     GoRoute(
-      path: '/',
-      redirect: (context, state) {
-        final cacheHelper = sl<CacheHelper>()
-          ..getSessionToken()
-          ..getUserId();
-        if ((Cache.instance.sessionToken == null ||
-                Cache.instance.userId == null) &&
-            !cacheHelper.isFirstTime()) {
-          return LoginScreen.path;
-        }
-        if (state.extra == 'home') return HomeViews.path;
-        return null;
-      },
-      builder: (_, __) {
-        final cacheHelper = sl<CacheHelper>()
-          ..getSessionToken()
-          ..getUserId();
-        if (cacheHelper.isFirstTime()) {
-          return const OnBoardingScreen();
-        }
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => sl<AuthCubit>()),
-            BlocProvider(create: (_) => sl<AuthUserCubit>()),
-          ],
-          child: const SplashScreen(),
-        );
-      },
+        path: '/',
+        redirect: (context, state) {
+          final cacheHelper = sl<CacheHelper>()
+            ..getSessionToken()
+            ..getUserId();
+          if ((Cache.instance.sessionToken == null ||
+                  Cache.instance.userId == null) &&
+              !cacheHelper.isFirstTime()) {
+            return LoginScreen.path;
+          }
+          if (state.extra == 'home') return HomeViews.path;
+
+          return null;
+        },
+        builder: (_, __) {
+          final cacheHelper = sl<CacheHelper>()
+            ..getSessionToken()
+            ..getUserId();
+          if (cacheHelper.isFirstTime()) {
+            return const OnBoardingScreen();
+          }
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => sl<AuthCubit>()),
+              BlocProvider(create: (_) => sl<AuthUserCubit>()),
+            ],
+            child: const SplashScreen(),
+          );
+        }),
+    GoRoute(
+      path: LoginScreen.path,
+      builder: (_, __) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: const LoginScreen(),
+      ),
     ),
-    GoRoute(
-        path: LoginScreen.path,
-        builder: (_, __) => BlocProvider(
-              create: (_) => sl<AuthCubit>(),
-              child: LoginScreen(),
-            )),
-    GoRoute(
-        path: RegisterScreen.path,
-        builder: (_, __) => BlocProvider(
-              create: (_) => sl<AuthCubit>(),
-              child: const RegisterScreen(),
-            )),
-    GoRoute(
-        path: ForgotPasswordScreen.path,
-        builder: (_, __) => const ForgotPasswordScreen()),
+     GoRoute(
+      path: ForgotPasswordScreen.path,
+      builder: (_, __) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: const ForgotPasswordScreen(),
+      ),
+    ),
+  GoRoute(
+  path: VerifyOtpScreen.path,
+  builder: (_, state) => BlocProvider(
+    create: (_) => sl<AuthCubit>(),
+    child: VerifyOtpScreen(
+      email: (state.extra as Map<String, String>)['email']!,
+    ),
+  ),
+),
     GoRoute(
       path: ResetPasswordScreen.path,
-      builder: (_, state) {
-        final email = state.extra as String?;
-        if (email == null) {
-          return ErrorScreen(message: 'Email is required');
-        }
-        return ResetPasswordScreen(email: email);
-      },
+      builder: (_, state) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: ResetPasswordScreen(email: state.extra as String),
+      ),
     ),
     GoRoute(
-      path: VerifyOtpScreen.path,
-      builder: (_, state) {
-        final email = state.extra as String?;
-        if (email == null) {
-          return ErrorScreen(message: 'Email is required');
-        }
-        return VerifyOtpScreen(email: email);
-      },
+      path: RegisterScreen.path,
+      builder: (_, __) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: const RegisterScreen(),
+      ),
     ),
     ShellRoute(
       routes: [
