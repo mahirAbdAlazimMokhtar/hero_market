@@ -41,7 +41,7 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
         if (state case AuthError(:final message)) {
           CoreUtils.showSnackBar(context, message: message);
         } else if (state is PasswordReset) {
-          CoreUtils.showSnackBar(context, message: 'Password reset successful!');
+          CoreUtils.showSnackBar(context, message: 'Password reset successful! ✅');
           context.go('/');
         }
       },
