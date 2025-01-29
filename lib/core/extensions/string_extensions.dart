@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 extension StringExt on String {
   Map<String, String> get toAuthHeaders {
     return {
@@ -16,7 +15,8 @@ extension StringExt on String {
       _ => ThemeMode.system,
     };
   }
- String get obscureEmail {
+
+  String get obscureEmail {
     // here we split the email into username and domain
     final index = indexOf('@');
     var username = substring(0, index);
@@ -27,5 +27,15 @@ extension StringExt on String {
     username = '${username[0]}****${username[username.length - 1]}';
 
     return '$username@$domain';
+  }
+
+  String get initials {
+    if (isEmpty) return '';
+    final words = trim().split(' ');
+    String initials = '';
+    for (var i = 0; i < words.length && i < 2; i++) {
+      initials += words[i][0];
+    }
+    return initials.toUpperCase();
   }
 }
