@@ -9,12 +9,16 @@ import 'package:hero_market/src/auth/presentation/app/screens/register_screen.da
 import 'package:hero_market/src/auth/presentation/app/screens/reset_password_screen.dart';
 import 'package:hero_market/src/auth/presentation/app/screens/splash_screen.dart';
 import 'package:hero_market/src/auth/presentation/app/screens/verify_otp_screen.dart';
+import 'package:hero_market/src/cart/presentation/views/cart_view.dart';
 import 'package:hero_market/src/dashboard/presentation/views/dashboard_screen.dart';
+import 'package:hero_market/src/explore/presentation/views/explore_view.dart';
 import 'package:hero_market/src/on_boarding/presentation/screens/on_boarding_screen.dart';
-import 'package:hero_market/src/user/app/adapter/cubit/auth_user_cubit.dart';
+import 'package:hero_market/src/user/presentation/app/adapter/cubit/auth_user_cubit.dart';
 import '../../src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 import '../../src/home/presentation/views/home_views.dart';
 
+import '../../src/user/presentation/views/profile_view.dart';
+import '../../src/wishlist/presentation/views/wishlist_view.dart';
 import '../common/singletons/cache.dart';
 
 

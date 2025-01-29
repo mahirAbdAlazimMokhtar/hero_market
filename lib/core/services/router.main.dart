@@ -1,12 +1,13 @@
 part of 'router.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   navigatorKey: rootNavigatorKey,
   debugLogDiagnostics: true,
   //First screen
   initialLocation: '/',
- routes: [
+  routes: [
     GoRoute(
         path: '/',
         redirect: (context, state) {
@@ -44,22 +45,22 @@ final router = GoRouter(
         child: const LoginScreen(),
       ),
     ),
-     GoRoute(
+    GoRoute(
       path: ForgotPasswordScreen.path,
       builder: (_, __) => BlocProvider(
         create: (_) => sl<AuthCubit>(),
         child: const ForgotPasswordScreen(),
       ),
     ),
-  GoRoute(
-  path: VerifyOtpScreen.path,
-  builder: (_, state) => BlocProvider(
-    create: (_) => sl<AuthCubit>(),
-    child: VerifyOtpScreen(
-      email: (state.extra as Map<String, String>)['email']!,
+    GoRoute(
+      path: VerifyOtpScreen.path,
+      builder: (_, state) => BlocProvider(
+        create: (_) => sl<AuthCubit>(),
+        child: VerifyOtpScreen(
+          email: (state.extra as Map<String, String>)['email']!,
+        ),
+      ),
     ),
-  ),
-),
     GoRoute(
       path: ResetPasswordScreen.path,
       builder: (_, state) => BlocProvider(
@@ -75,12 +76,23 @@ final router = GoRouter(
       ),
     ),
     ShellRoute(
+      navigatorKey: _shellNavigatorKey,
       routes: [
         GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
+        GoRoute(
+            path: ExploreView.path, builder: (_, __) => const ExploreView()),
+        GoRoute(
+            path: WishlistView.path, builder: (_, __) => const WishlistView()),
       ],
       builder: (context, state, child) {
         return DashboardScreen(state: state, child: child);
       },
-    )
+    ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: ProfileView.path, builder: (_, __) => const ProfileView()),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: CartView.path, builder: (_, __) => const CartView()),
   ],
 );
