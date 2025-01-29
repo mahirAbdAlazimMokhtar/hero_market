@@ -55,6 +55,9 @@ class _LoginFormState extends State<LoginForm> {
                 hintText: 'Enter your email',
                 keyboardType: TextInputType.emailAddress,
               ),
+              SizedBox(
+                height: 20,
+              ),
               const Gap(20),
               ValueListenableBuilder(
                 valueListenable: obscurePasswordNotifier,
