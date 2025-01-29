@@ -131,6 +131,27 @@ The **Reset Password** functionality enhances user security and experience by pr
 
   ![Simulator Screenshot - iPhone 16 Plus - 2024-12-30 at 10 48 22](https://github.com/user-attachments/assets/16ef516b-5590-475d-8d1c-2b41ad808b04)
 
+  ## 🆕 Bottom Navigation Bar
+
+A **Bottom Navigation Bar** has been added for a seamless user experience. The navigation bar includes the following tabs:
+
+- **Home** 🏠  
+- **Categories** 📂  
+- **Cart** 🛒  
+- **Wishlist** ❤️  
+- **Profile** 👤  
+
+### 🌙 Dark Mode Screenshot
+
+![Dark Mode Bottom Navigation Bar](https://github.com/user-attachments/assets/7ca0d44c-e94f-4824-bc78-9badf926525a)
+
+&nbsp;
+
+### 🌞 Light Mode Screenshot
+
+![Light Mode Bottom Navigation Bar](https://github.com/user-attachments/assets/3c8515c3-3d14-43a8-9bb5-8136dbebea9b)
+
+
 ## 📚 Features
 
 - **OnBoarding Screens**
