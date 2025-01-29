@@ -3,7 +3,7 @@ import 'package:hero_market/src/auth/domain_layer/repositories/auth_repository.d
 import 'package:hero_market/src/auth/domain_layer/usecases/forget_password.dart';
 import 'package:hero_market/src/auth/domain_layer/usecases/verify_otp.dart';
 import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
-import 'package:hero_market/src/user/app/adapter/cubit/auth_user_cubit.dart';
+import 'package:hero_market/src/user/presentation/app/adapter/cubit/auth_user_cubit.dart';
 import 'package:hero_market/src/user/data/datasources/user_remote_data_source.dart';
 import 'package:hero_market/src/user/data/repositories/user_repository_implementation.dart';
 import 'package:hero_market/src/user/domain/repository/user_repo.dart';
