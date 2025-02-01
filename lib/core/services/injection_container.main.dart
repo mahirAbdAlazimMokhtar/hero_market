@@ -55,6 +55,6 @@ Future<void> _cacheInit() async {
   final prefs = await SharedPreferences.getInstance();
 
   sl
-    ..registerLazySingleton(() => CacheHelper(sl()))
+    ..registerLazySingleton(() => CacheHelper(sl())..getThemeMode())
     ..registerLazySingleton(() => prefs);
 }

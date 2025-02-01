@@ -45,7 +45,16 @@ class BottomSheetCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
+                 Expanded(
+                  flex: 3,
+                  child: RoundedButton(
+                    text: negativeButtonText,
+                    color: negativeButtonColor,
+                    height: 55,
+                    onPressed: () => Navigator.of(context).pop(false),
+                  )),
+              const Spacer(),
+                Expanded(
                 flex: 3,
                 child: RoundedButton(
                   text: positiveButtonText,
@@ -54,15 +63,7 @@ class BottomSheetCard extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(true),
                 ),
               ),
-              const Spacer(),
-              Expanded(
-                  flex: 3,
-                  child: RoundedButton(
-                    text: negativeButtonText,
-                    color: negativeButtonColor,
-                    height: 55,
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ))
+         
             ],
           ),
         )

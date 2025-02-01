@@ -16,6 +16,7 @@ import 'package:hero_market/src/wishlist/presentation/views/wishlist_view.dart';
 import '../../../../../core/common/app/cache_helper.dart';
 import '../../../../../core/common/widgets/bottom_sheet_card.dart';
 import '../../../../../core/services/injection_container.dart';
+import 'theme_toggle.dart';
 
 class DashboardDrawer extends StatefulWidget {
   const DashboardDrawer({super.key});
@@ -108,36 +109,43 @@ class _DashboardDrawerState extends State<DashboardDrawer> {
               bottom: 50,
               top: 10,
             ),
-            child: ValueListenableBuilder(
-              valueListenable: signingOutNotifier,
-              builder: (_, value, __) {
-                return RoundedButton(
-                  text: 'Sign Out',
-                  height: 50,
-                  onPressed: () async {
-                    final router = GoRouter.of(context);
-                    final result = await showModalBottomSheet<bool>(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      isDismissible: false,
-                      builder: (_) {
-                        return BottomSheetCard(
-                          title: 'Are you sure you want to sign out?',
-                          positiveButtonText: 'Yes',
-                          negativeButtonText: 'Cancel',
-                          positiveButtonColor: AppColors.lightThemeSecondaryColor,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const ThemeToggle(),
+                const Gap(10),
+                ValueListenableBuilder(
+                  valueListenable: signingOutNotifier,
+                  builder: (_, value, __) {
+                    return RoundedButton(
+                      text: 'Sign Out',
+                      height: 50,
+                      onPressed: () async {
+                        final router = GoRouter.of(context);
+                        final result = await showModalBottomSheet<bool>(
+                          context: context,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          isDismissible: false,
+                          builder: (_) {
+                            return BottomSheetCard(
+                              title: 'Are you sure you want to sign out?',
+                              positiveButtonText: 'Yes',
+                              negativeButtonText: 'Cancel',
+                              positiveButtonColor: AppColors.lightThemeSecondaryColor,
+                            );
+                          },
                         );
+                        if (result ?? false) {
+                          signingOutNotifier.value = true;
+                          await sl<CacheHelper>().resetSession();
+                          router.go('/');
+                        }
                       },
-                    );
-                    if (result ?? false) {
-                      signingOutNotifier.value = true;
-                      await sl<CacheHelper>().resetSession();
-                      router.go('/');
-                    }
+                    ).loading(value);
                   },
-                ).loading(value);
-              },
+                ),
+              ],
             ),
           )
         ],
