@@ -27,9 +27,9 @@ class AuthUserCubit extends Cubit<AuthUserState> {
         _userProvider = userProvider,
         super(const AuthUserInitial());
 
-  Future<void> getUserById(String id) async {
+  Future<void> getUserById(String userId) async {
     emit(const GettingUserData());
-    final result = await _getUser(id);
+    final result = await _getUser(userId);
     result.fold((failure) => emit(AuthUserError(failure.errorMessage)), (user) {
       _userProvider.setUser(user);
       emit(FetchedUser(user));

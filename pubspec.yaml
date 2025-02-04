@@ -29,6 +29,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   iconly: ^1.0.1
   collection: ^1.19.0
+  webview_flutter: ^4.10.0
 
 dev_dependencies:
   flutter_test:

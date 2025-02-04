@@ -25,7 +25,7 @@ abstract class UserRemoteDataSource {
 }
 
 //---End Points For User------///
-const GET_USER = '/user';
+const USERS_ENDPOINT = '/users';
 
 
 class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
@@ -36,11 +36,14 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
   @override
   Future<UserModel> getUser(String userId) async {
     try {
-      final uri = Uri.parse('${NetworkConstants.baseUrl}$GET_USER/$userId');
+      final uri = Uri.parse('${NetworkConstants.baseUrl}$USERS_ENDPOINT/$userId');
       final response = await _client.get(uri,
           headers: Cache.instance.sessionToken!.toAuthHeaders);
+
       final payload = jsonDecode(response.body) as DataMap;
+
       await NetworkUtils.renewToken(response);
+
       if (response.statusCode != 200) {
         final errorResponse = ErrorResponse.fromMap(payload);
         throw ServerException(
@@ -62,12 +65,13 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
   @override
   Future<String> getUserPaymentProfile(String userId) async {
     try {
-      final uri = Uri.parse(
-          '${NetworkConstants.baseUrl}$GET_USER/$userId/paymentProfile');
+      final uri = Uri.parse('${NetworkConstants.baseUrl}$USERS_ENDPOINT/$userId/paymentProfile');
       final response = await _client.get(uri,
           headers: Cache.instance.sessionToken!.toAuthHeaders);
+
       final payload = jsonDecode(response.body) as DataMap;
       await NetworkUtils.renewToken(response);
+
       if (response.statusCode != 200) {
         final errorResponse = ErrorResponse.fromMap(payload);
         throw ServerException(
@@ -80,38 +84,48 @@ class UserRemoteDataSourceImplementation implements UserRemoteDataSource {
     } catch (e, s) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: s);
-      throw ServerException(
+      throw const ServerException(
           message: "Mahir :--- Error Occurred : It's not you, it's us",
           statusCode: 500);
     }
   }
 
   @override
-  Future<UserModel> updateUser(
-      {required String userId, required DataMap updateData}) async {
+Future<UserModel> updateUser({
+    required String userId,
+    required DataMap updateData,
+  }) async {
     try {
-      final uri = Uri.parse('{NetworkConstants.baseUrl}$GET_USER/$userId');
-      final response = await _client.put(uri,
-          headers: Cache.instance.sessionToken!.toAuthHeaders,
-          body: jsonEncode(updateData));
+      final uri = Uri.parse(
+        '${NetworkConstants.baseUrl}$USERS_ENDPOINT/$userId',
+      );
+
+      final response = await _client.put(
+        uri,
+        body: jsonEncode(updateData),
+        headers: Cache.instance.sessionToken!.toAuthHeaders,
+      );
+
       final payload = jsonDecode(response.body) as DataMap;
       await NetworkUtils.renewToken(response);
+
       if (response.statusCode != 200 && response.statusCode != 201) {
         final errorResponse = ErrorResponse.fromMap(payload);
         throw ServerException(
-            message: errorResponse.errorMessage,
-            statusCode: response.statusCode);
+          message: errorResponse.errorMessage,
+          statusCode: response.statusCode,
+        );
       }
-
-      return UserModel.fromMap(updateData);
+      return UserModel.fromMap(payload);
     } on ServerException {
       rethrow;
     } catch (e, s) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: s);
-      throw ServerException(
-          message: "Mahir :--- Error Occurred : It's not you, it's us",
-          statusCode: 500);
+      throw const ServerException(
+        message: "Error Occurred: It's not your fault, it's ours",
+        statusCode: 500,
+      );
     }
   }
 }

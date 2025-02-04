@@ -54,7 +54,8 @@ Future<void> _authInit() async {
 Future<void> _cacheInit() async {
   final prefs = await SharedPreferences.getInstance();
 
-  sl
-    ..registerLazySingleton(() => CacheHelper(sl())..getThemeMode())
-    ..registerLazySingleton(() => prefs);
+  sl.registerSingleton<SharedPreferences>(prefs); // تسجيل SharedPreferences أولاً
+  sl.registerLazySingleton<CacheHelper>(() => CacheHelper(sl())..getThemeMode());
 }
+
+

@@ -8,36 +8,48 @@ final router = GoRouter(
   //First screen
   initialLocation: '/',
   routes: [
-    GoRoute(
-        path: '/',
-        redirect: (context, state) {
-          final cacheHelper = sl<CacheHelper>()
-            ..getSessionToken()
-            ..getUserId();
-          if ((Cache.instance.sessionToken == null ||
-                  Cache.instance.userId == null) &&
-              !cacheHelper.isFirstTime()) {
-            return LoginScreen.path;
-          }
-          if (state.extra == 'home') return HomeViews.path;
+  GoRoute(
+  path: '/',
+  redirect: (context, state) {
+    final cacheHelper = sl<CacheHelper>()
+      ..getSessionToken()
+      ..getUserId();
+    
+    final sessionToken = Cache.instance.sessionToken;
+    final userId = Cache.instance.userId;
+    
+    debugPrint("Session Token: $sessionToken, UserId: $userId");
+    
+    if ((sessionToken == null || userId == null) && !cacheHelper.isFirstTime()) {
+      return LoginScreen.path;
+    }
 
-          return null;
-        },
-        builder: (_, __) {
-          final cacheHelper = sl<CacheHelper>()
-            ..getSessionToken()
-            ..getUserId();
-          if (cacheHelper.isFirstTime()) {
-            return const OnBoardingScreen();
-          }
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (_) => sl<AuthCubit>()),
-              BlocProvider(create: (_) => sl<AuthUserCubit>()),
-            ],
-            child: const SplashScreen(),
-          );
-        }),
+    if (state.extra == 'home') {
+      return HomeViews.path;
+    }
+
+    return null;
+  },
+  builder: (_, __) {
+    final cacheHelper = sl<CacheHelper>()
+      ..getSessionToken()
+      ..getUserId();
+
+    debugPrint("Is First Time: ${cacheHelper.isFirstTime()}");
+    
+    if (cacheHelper.isFirstTime()) {
+      return const OnBoardingScreen();
+    }
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<AuthUserCubit>()),
+      ],
+      child: const SplashScreen(),
+    );
+  },
+),
     GoRoute(
       path: LoginScreen.path,
       builder: (_, __) => BlocProvider(
@@ -77,6 +89,9 @@ final router = GoRouter(
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
+      builder: (context, state, child) {
+        return DashboardScreen(state: state, child: child);
+      },
       routes: [
         GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
         GoRoute(
@@ -84,15 +99,20 @@ final router = GoRouter(
         GoRoute(
             path: WishlistView.path, builder: (_, __) => const WishlistView()),
       ],
-      builder: (context, state, child) {
-        return DashboardScreen(state: state, child: child);
-      },
     ),
     GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: ProfileView.path, builder: (_, __) => const ProfileView()),
+        parentNavigatorKey: rootNavigatorKey,
+        path: ProfileView.path,
+        builder: (_, __) => const ProfileView()),
     GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: CartView.path, builder: (_, __) => const CartView()),
+        parentNavigatorKey: rootNavigatorKey,
+        path: CartView.path,
+        builder: (_, __) => const CartView()),
+    GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: PaymentProfileView.path,
+        builder: (_, state) => PaymentProfileView(
+              sessionUrl: state.extra as String,
+            )),
   ],
 );

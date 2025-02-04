@@ -40,7 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
   final UserProvider _userProvider;
 
   Future<void> login(String email, String password) async {
-    emit(AuthLoading());
+    emit(const AuthLoading());
     final result = await _login(LoginParams(email: email, password: password));
     result.fold((failure) => emit(AuthError(failure.errorMessage)), (user) {
       _userProvider.setUser(user);
@@ -97,7 +97,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> verifyToken() async {
-    emit(AuthLoading());
+    emit(const AuthLoading());
     final result = await _verifyToken();
     result.fold((failure) => emit(AuthError(failure.errorMessage)), (isValid) {
       emit(TokenVerified(isValid));

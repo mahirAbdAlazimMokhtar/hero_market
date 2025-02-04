@@ -5,11 +5,10 @@ import '../common/app/cache_helper.dart';
 import '../services/injection_container.dart';
 
 abstract class NetworkUtils {
-  const NetworkUtils();
-  static Future<void> renewToken(http.Response response) async {
+  const NetworkUtils();  static Future<void> renewToken(http.Response response) async {
     if (response.headers['authorization'] != null) {
       var token = response.headers['authorization'] as String;
-      if (token.startsWith("Bearer")) {
+      if (token.startsWith('Bearer')) {
         token = token.replaceFirst('Bearer', '').trim();
       }
       await sl<CacheHelper>().cacheSessionToken(token);

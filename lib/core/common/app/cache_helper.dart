@@ -1,6 +1,3 @@
-
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/extensions/theme_mode_extension.dart';
@@ -17,15 +14,19 @@ class CacheHelper {
   static const _themeModeKey = 'theme-mode';
   static const _firstTimerKey = 'is-user-first-timer';
 
-  Future<bool> cacheSessionToken(String sessionToken) async {
-    try {
-      final result = await _prefs.setString(_sessionTokenKey, sessionToken);
-      Cache.instance.setSessionToken(sessionToken);
-      return result;
-    } catch (_) {
-      return false;
-    }
+ Future<bool> cacheSessionToken(String token) async {
+  try {
+    debugPrint("Saving Token: $token");
+    final result = await _prefs.setString(_sessionTokenKey, token);
+    Cache.instance.setSessionToken(token);
+    debugPrint("Token Saved Successfully: ${getSessionToken()}");
+    return result;
+  } catch (e) {
+    debugPrint("Error Saving Token: $e");
+    return false;
   }
+}
+
 
   Future<bool> cacheUserId(String userId) async {
     try {
@@ -46,17 +47,15 @@ class CacheHelper {
     Cache.instance.setThemeMode(themeMode);
   }
 
-  String? getSessionToken() {
-    final sessionToken = _prefs.getString(_sessionTokenKey);
-    if (sessionToken case String()) {
-      Cache.instance.setSessionToken(sessionToken);
-    } else {
-      if (kDebugMode) {
-        print('No session token found in SharedPreferences.');
-      }
-    }
-    return sessionToken;
+String? getSessionToken() {
+  final sessionToken = _prefs.getString(_sessionTokenKey);
+  debugPrint("Session Token retrieved: $sessionToken");
+  if (sessionToken != null) {
+    Cache.instance.setSessionToken(sessionToken);
   }
+  return sessionToken;
+}
+
 
   String? getUserId() {
     final userId = _prefs.getString(_userIdKey);

@@ -31,10 +31,12 @@ final class FetchedUser extends AuthUserState {
 }
 
 final class FetchedUserPaymentProfile extends AuthUserState {
-  const FetchedUserPaymentProfile(this.paymentProfile);
-  final String paymentProfile;
+  const FetchedUserPaymentProfile(this.paymentProfileUrl);
+
+  final String paymentProfileUrl;
+
   @override
-  List<Object> get props => [paymentProfile];
+  List<Object> get props => [paymentProfileUrl];
 }
 
 final class AuthUserError extends AuthUserState {

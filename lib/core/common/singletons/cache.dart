@@ -14,9 +14,12 @@ class Cache {
   String? get sessionToken => _sessionToken;
   String? get userId => _userId;
 
-  void setSessionToken(String? newToken) {
-    if (_sessionToken != newToken) _sessionToken = newToken;
+void setSessionToken(String? newToken) {
+  if (_sessionToken != newToken) {
+    _sessionToken = newToken;
+    debugPrint("Session token updated: $_sessionToken");
   }
+}
 
   void setUserId(String? newUserId) {
     if (_userId != newUserId) _userId = newUserId;
