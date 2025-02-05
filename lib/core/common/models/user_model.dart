@@ -7,7 +7,6 @@ import 'package:hero_market/core/common/models/address_model.dart';
 import '../../../src/wishlist/data_layer/models/wishlist_product_model.dart';
 import '../../../src/wishlist/domain_layer/entities/wishlist_product.dart';
 import '../entities/address.dart';
-
 class UserModel extends User {
   const UserModel({
     required super.id,
@@ -67,25 +66,37 @@ class UserModel extends User {
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(jsonDecode(source) as DataMap);
 
-  factory UserModel.fromMap(DataMap map) {
-    final address = AddressModel.fromMap({
-      if (map case {'street': String street}) 'street': street,
-      if (map case {'apartment': String apartment}) 'apartment': apartment,
-      if (map case {'city': String city}) 'city': city,
-      if (map case {'postalCode': String postalCode}) 'postalCode': postalCode,
-      if (map case {'country': String country}) 'country': country,
-    });
-    return UserModel(
-      id: map['id'] as String? ?? 'default_id', // Provide a default or handle null
-    name: map['name'] as String? ?? 'default_name', // Provide a default or handle null
-    email: map['email'] as String? ?? 'default_email', // Provide a default or handle null
-    isAdmin: map['isAdmin'] as bool? ?? false, // Provide a default or handle null
-    wishlist: (map['wishlist'] as List<dynamic>?)?.map((item) => WishlistProductModel.fromMap(item as DataMap)).toList().cast<WishlistProduct>() ?? [], // Handle null case
+ factory UserModel.fromMap(DataMap map) {
+  // بناء العنوان
+  final address = AddressModel.fromMap({
+    if (map case {'street': String street}) 'street': street,
+    if (map case {'apartment': String apartment}) 'apartment': apartment,
+    if (map case {'city': String city}) 'city': city,
+    if (map case {'postalCode': String postalCode}) 'postalCode': postalCode,
+    if (map case {'country': String country}) 'country': country,
+  });
+
+  // الحقول الافتراضية والتحقق
+  final id = map['id'] as String? ?? map['_id'] as String? ?? '';
+  final name = map['name'] as String? ?? 'Unknown';
+  final email = map['email'] as String? ?? '';
+  final isAdmin = map['isAdmin'] as bool? ?? false;
+  final wishlist = (map['wishlist'] as List?)
+          ?.map((item) => WishlistProductModel.fromMap(item as DataMap))
+          .toList() ??
+      [];
+
+  // إنشاء UserModel
+  return UserModel(
+    id: id,
+    name: name,
+    email: email,
+    isAdmin: isAdmin,
+    wishlist: wishlist,
     address: address.isEmpty ? null : address,
     phone: map['phone'] as String?,
-    );
-  }
+  );
+}
 
   String toJson() => jsonEncode(toMap());
 }
-// Fix this ?
