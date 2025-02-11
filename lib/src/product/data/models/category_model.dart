@@ -1,4 +1,4 @@
-import '../../entities/category.dart';
+import '../../domain/entities/category.dart';
 
 class ProductCategoryModel extends ProductCategory {
   const ProductCategoryModel({

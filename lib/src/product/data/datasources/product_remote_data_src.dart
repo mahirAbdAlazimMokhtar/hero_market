@@ -5,13 +5,13 @@ import 'package:hero_market/core/common/singletons/cache.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/utils/constants/network_constants.dart';
 import 'package:hero_market/core/utils/network_utils.dart';
-import 'package:hero_market/src/product/domain/data/models/category_model.dart';
-import 'package:hero_market/src/product/domain/data/models/review_model.dart';
+import 'package:hero_market/src/product/data/models/category_model.dart';
+import 'package:hero_market/src/product/data/models/review_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../../core/errors/exceptions.dart';
-import '../../../../../core/utils/error_response.dart';
-import '../../../../../core/utils/typedefs.dart';
+import '../../../../core/errors/exceptions.dart';
+import '../../../../core/utils/error_response.dart';
+import '../../../../core/utils/typedefs.dart';
 import '../models/product_models.dart';
 
 abstract interface class ProductModelsRemoteDataSrc {

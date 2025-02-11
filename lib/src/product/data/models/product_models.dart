@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hero_market/core/extensions/color_extension.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/utils/typedefs.dart';
-import 'package:hero_market/src/product/domain/data/models/category_model.dart';
+import 'package:hero_market/src/product/data/models/category_model.dart';
 import 'package:hero_market/src/product/domain/entities/product.dart';
 
 class ProductModel extends Product {
