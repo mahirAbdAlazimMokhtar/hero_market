@@ -222,66 +222,36 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
   }
 
   @override
- Future<bool> verifyToken() async {
-  try {
-    final uri = Uri.parse('${NetworkConstants.baseUrl}$VERIFY_TOKEN_ENDPOINT');
-
-    final response = await _httpClient.get(
-      uri,
-      headers: Cache.instance.sessionToken?.toAuthHeaders ?? {},
-    );
-
-    debugPrint('🔹 API Response Status: ${response.statusCode}');
-    debugPrint('🔹 API Response Body: ${response.body}');
-
-    // ✅ التحقق مما إذا كانت الاستجابة فارغة
-    if (response.body.isEmpty) {
-      throw ServerException(
-        message: "Empty response from server",
-        statusCode: response.statusCode,
-      );
-    }
-
-    // ✅ محاولة فك تشفير JSON بأمان
-    dynamic payload;
+  Future<bool> verifyToken() async {
     try {
-      payload = jsonDecode(response.body);
-    } on FormatException catch (e) {
-      debugPrint("⚠ JSON Parsing Error: ${e.message}");
-      throw ServerException(
-        message: "Invalid JSON format from server",
-        statusCode: response.statusCode,
+      final uri = Uri.parse(
+        '${NetworkConstants.baseUrl}$VERIFY_TOKEN_ENDPOINT',
+      );
+
+      final response = await http.get(
+        uri,
+        headers: Cache.instance.sessionToken!.toAuthHeaders,
+      );
+
+      final payload = jsonDecode(response.body) as DataMap;
+      await NetworkUtils.renewToken(response);
+      if (response.statusCode != 200) {
+        final errorResponse = ErrorResponse.fromMap(payload);
+        throw ServerException(
+          message: errorResponse.errorMessage,
+          statusCode: response.statusCode,
+        );
+      }
+      return payload as bool;
+    } on ServerException {
+      rethrow;
+    } catch (e, s) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: s);
+      throw const ServerException(
+        message: "Error Occurred: It's not your fault, it's ours",
+        statusCode: 500,
       );
     }
-
-    await NetworkUtils.renewToken(response);
-
-    if (response.statusCode != 200) {
-      final errorResponse = ErrorResponse.fromMap(payload as Map<String, dynamic>);
-      throw ServerException(
-        message: errorResponse.errorMessage,
-        statusCode: response.statusCode,
-      );
-    }
-
-    // ✅ التحقق من أن `payload` هو `bool`
-    if (payload is bool) {
-      return payload;
-    } else {
-      throw ServerException(
-        message: "Unexpected response format: Expected boolean",
-        statusCode: response.statusCode,
-      );
-    }
-  } on ServerException {
-    rethrow;
-  } catch (e, s) {
-    debugPrint("⚠ Unexpected Error: $e");
-    debugPrintStack(stackTrace: s);
-    throw const ServerException(
-      message: "Error Occurred: It's not your fault, it's ours",
-      statusCode: 500,
-    );
   }
-}
 }

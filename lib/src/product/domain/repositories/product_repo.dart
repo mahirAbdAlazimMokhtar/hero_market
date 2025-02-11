@@ -38,7 +38,7 @@ abstract interface class ProductRepo {
       required int page,
       required String query});
 
-  ResultFuture<bool> leaveReview({
+  ResultFuture<void> leaveReview({
     required String productId,
     required String comment,
     required String userId,

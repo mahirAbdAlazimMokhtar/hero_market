@@ -38,4 +38,6 @@ extension StringExt on String {
     }
     return initials.toUpperCase();
   }
+
+  Color get colors =>  Color(int.parse(replaceFirst('#', 'FF'), radix: 16));
 }

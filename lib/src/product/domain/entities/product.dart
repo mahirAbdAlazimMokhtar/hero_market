@@ -1,6 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
+import 'package:equatable/equatable.dart';
 import 'package:hero_market/src/product/domain/entities/category.dart';
 
 class Product extends Equatable {
@@ -11,7 +10,7 @@ class Product extends Equatable {
   final double price;
   final ProductCategory category;
   final double rating;
-  final List<Colors> colors;
+  final List<Color> colors;
   final List<String> images;
   final List<String> sizes;
   final List<String> reviewIds;
@@ -19,21 +18,22 @@ class Product extends Equatable {
   final int countInStock;
   final int numOfReviews;
 
-  const Product(
-      {required this.id,
-      required this.name,
-      required this.image,
-      required this.description,
-      required this.price,
-      required this.category,
-      required this.rating,
-      required this.colors,
-      required this.images,
-      required this.sizes,
-      required this.reviewIds,
-      this.genderAgeCategory,
-      required this.countInStock,
-      required this.numOfReviews});
+  const Product({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.price,
+    required this.category,
+    required this.rating,
+    required this.colors,
+    required this.images,
+    required this.sizes,
+    required this.reviewIds,
+    this.genderAgeCategory,
+    required this.countInStock,
+    required this.numOfReviews,
+  });
 
   const Product.empty()
       : id = 'Test String ',

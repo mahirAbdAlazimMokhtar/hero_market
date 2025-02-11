@@ -3,12 +3,12 @@ import 'package:hero_market/core/usecase/usecase.dart';
 import 'package:hero_market/core/utils/typedefs.dart';
 import 'package:hero_market/src/product/domain/repositories/product_repo.dart';
 
-class LeaveReview extends UsecasesWithParams<bool, LeaveReviewParams> {
+class LeaveReview extends UsecasesWithParams<void, LeaveReviewParams> {
   final ProductRepo _productRepo;
   LeaveReview(this._productRepo);
 
   @override
-  ResultFuture<bool> call(LeaveReviewParams params) {
+  ResultFuture<void> call(LeaveReviewParams params) {
     return _productRepo.leaveReview(
       productId: params.productId,
       comment: params.comment,

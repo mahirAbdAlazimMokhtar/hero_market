@@ -1,3 +1,5 @@
+
+
 import 'package:equatable/equatable.dart';
 
 class ProductCategory extends Equatable {
@@ -5,7 +7,7 @@ class ProductCategory extends Equatable {
 
   //empty constructor
   const ProductCategory.empty() : this(id: 'Test String');
-  const ProductCategory.all() : this(id: '' , name: 'All');
+  const ProductCategory.all() : this(id: '', name: 'All');
 
   final String id;
   final String? name;
@@ -14,4 +16,7 @@ class ProductCategory extends Equatable {
 
   @override
   List<Object?> get props => [id, name, color, image];
+
+  //create fromMap toMap
+
 }
