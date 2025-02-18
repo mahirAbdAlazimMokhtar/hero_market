@@ -18,7 +18,6 @@ final router = GoRouter(
     final sessionToken = Cache.instance.sessionToken;
     final userId = Cache.instance.userId;
     
-    debugPrint("Session Token: $sessionToken, UserId: $userId");
     
     if ((sessionToken == null || userId == null) && !cacheHelper.isFirstTime()) {
       return LoginScreen.path;
@@ -35,7 +34,6 @@ final router = GoRouter(
       ..getSessionToken()
       ..getUserId();
 
-    debugPrint("Is First Time: ${cacheHelper.isFirstTime()}");
     
     if (cacheHelper.isFirstTime()) {
       return const OnBoardingScreen();

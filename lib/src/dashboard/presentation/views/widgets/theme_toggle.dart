@@ -66,7 +66,7 @@ class _ThemeToggleState extends State<ThemeToggle> {
             }
           });
           await sl<CacheHelper>().cacheThemeMode(mode);
-          (rootNavigatorKey.currentState! as Element).visitChildren(rebuild);
+         rootNavigatorKey.currentContext?.visitChildElements(rebuild);
         },
         child: Align(
           alignment: Alignment.centerLeft,

@@ -220,38 +220,51 @@ class AuthRemoteDataSourceImplementation implements AuthRemoteDataSource {
           statusCode: 500);
     }
   }
+@override
+Future<bool> verifyToken() async {
+  try {
+    final uri = Uri.parse('${NetworkConstants.baseUrl}$VERIFY_TOKEN_ENDPOINT');
 
-  @override
-  Future<bool> verifyToken() async {
-    try {
-      final uri = Uri.parse(
-        '${NetworkConstants.baseUrl}$VERIFY_TOKEN_ENDPOINT',
-      );
+    final response = await http.get(
+      uri,
+      headers: Cache.instance.sessionToken!.toAuthHeaders,
+    );
 
-      final response = await http.get(
-        uri,
-        headers: Cache.instance.sessionToken!.toAuthHeaders,
-      );
 
-      final payload = jsonDecode(response.body) as DataMap;
-      await NetworkUtils.renewToken(response);
-      if (response.statusCode != 200) {
-        final errorResponse = ErrorResponse.fromMap(payload);
-        throw ServerException(
-          message: errorResponse.errorMessage,
-          statusCode: response.statusCode,
-        );
+    // تأكد من أن `response.body` ليس Boolean قبل محاولة `jsonDecode`
+    if (response.statusCode == 200) {
+      final dynamic payload = jsonDecode(response.body);
+      
+      if (payload is bool) {
+        return payload; // ✅ إذا كان Bool، قم بإرجاعه مباشرةً
       }
-      return payload as bool;
-    } on ServerException {
-      rethrow;
-    } catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
+
+      if (payload is Map<String, dynamic>) {
+        await NetworkUtils.renewToken(response);
+        return true; // ✅ نفترض أن `Map` تعني نجاح التحقق
+      }
+
       throw const ServerException(
-        message: "Error Occurred: It's not your fault, it's ours",
+        message: "Unexpected response format",
         statusCode: 500,
       );
+    } else {
+      final errorResponse = ErrorResponse.fromMap(jsonDecode(response.body));
+      throw ServerException(
+        message: errorResponse.errorMessage,
+        statusCode: response.statusCode,
+      );
     }
+  } on ServerException {
+    rethrow;
+  } catch (e, s) {
+    debugPrint(e.toString());
+    debugPrintStack(stackTrace: s);
+    throw const ServerException(
+      message: "Error Occurred: It's not your fault, it's ours",
+      statusCode: 500,
+    );
   }
+}
+
 }

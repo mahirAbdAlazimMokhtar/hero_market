@@ -17,7 +17,6 @@ class Cache {
 void setSessionToken(String? newToken) {
   if (_sessionToken != newToken) {
     _sessionToken = newToken;
-    debugPrint("Session token updated: $_sessionToken");
   }
 }
 

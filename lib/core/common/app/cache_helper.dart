@@ -16,10 +16,8 @@ class CacheHelper {
 
  Future<bool> cacheSessionToken(String token) async {
   try {
-    debugPrint("Saving Token: $token");
     final result = await _prefs.setString(_sessionTokenKey, token);
     Cache.instance.setSessionToken(token);
-    debugPrint("Token Saved Successfully: ${getSessionToken()}");
     return result;
   } catch (e) {
     debugPrint("Error Saving Token: $e");
@@ -49,7 +47,6 @@ class CacheHelper {
 
 String? getSessionToken() {
   final sessionToken = _prefs.getString(_sessionTokenKey);
-  debugPrint("Session Token retrieved: $sessionToken");
   if (sessionToken != null) {
     Cache.instance.setSessionToken(sessionToken);
   }
