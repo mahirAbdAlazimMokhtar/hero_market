@@ -1,0 +1,8 @@
+# This is the configuration file for the flutter_native_splash package.
+# More information can be found at https://pub.dev/packages/flutter_native_splash
+
+flutter_native_splash:
+  color: "#42a5f5" # Background color for the splash screen
+  image: assets/images/splash.png # Path to the image to be used as the splash screen
+  android: true # Enable splash screen for Android
+  ios: true # Enable splash screen for iOS

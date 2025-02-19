@@ -30,6 +30,8 @@ dependencies:
   iconly: ^1.0.1
   collection: ^1.19.0
   webview_flutter: ^4.10.0
+  flutter_native_splash: ^2.4.4
+
 
 dev_dependencies:
   flutter_test:

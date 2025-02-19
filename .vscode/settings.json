@@ -5,5 +5,6 @@
         "iconly",
         "usecase"
     ],
-    "cmake.sourceDirectory": "/Users/mahirmokhtr/Documents/flutter-projects/hero_market/windows/flutter"
+    "cmake.sourceDirectory": "/Users/mahirmokhtr/Documents/flutter-projects/hero_market/windows/flutter",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
