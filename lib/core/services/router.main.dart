@@ -91,7 +91,7 @@ final router = GoRouter(
         return DashboardScreen(state: state, child: child);
       },
       routes: [
-        GoRoute(path: HomeViews.path, builder: (_, __) => const HomeViews()),
+        GoRoute(path: HomeViews.path, builder: (_, __) =>  HomeViews()),
         GoRoute(
             path: ExploreView.path, builder: (_, __) => const ExploreView()),
         GoRoute(

@@ -9,19 +9,19 @@ class RoundedButton extends StatelessWidget {
       this.onPressed,
       required this.text,
       this.padding,
-      this.style,
+      this.textStyle,
       this.color,
       this.height});
   final VoidCallback? onPressed;
   final String text;
   final EdgeInsetsGeometry? padding;
-  final TextStyle? style;
+  final TextStyle? textStyle;
   final double? height;
   final Color? color;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right:8.0),
+      padding: const EdgeInsets.only(right: 8.0),
       child: SizedBox(
         height: height ?? 66,
         width: double.maxFinite,
@@ -40,7 +40,7 @@ class RoundedButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: style ?? AppTextStyles.buttonTextHeadingSemiBold.white,
+            style: textStyle ?? AppTextStyles.buttonTextHeadingSemiBold.white,
           ),
         ),
       ),
