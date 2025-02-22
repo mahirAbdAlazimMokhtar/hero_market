@@ -39,5 +39,13 @@ extension StringExt on String {
     return initials.toUpperCase();
   }
 
-  Color get colors =>  Color(int.parse(replaceFirst('#', 'FF'), radix: 16));
+  Color get colors => Color(int.parse(replaceFirst('#', 'FF'), radix: 16));
+
+  String truncateWithEllipsis(int maxLength) {
+    if (length <= maxLength){
+       return this;
+    }else {
+      return '${substring(0, maxLength )}...';
+    }
+  }
 }
