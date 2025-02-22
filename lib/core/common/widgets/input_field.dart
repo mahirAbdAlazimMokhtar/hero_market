@@ -26,6 +26,7 @@ class InputField extends StatelessWidget {
     this.focusNode,
     this.onTap,
     this.suffixIconConstraints,
+    this.onTapOutside,
   });
 
   final Widget? suffixIcon;
@@ -45,14 +46,13 @@ class InputField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool expandable;
   final BoxConstraints? suffixIconConstraints;
-
+  final ValueChanged<PointerDownEvent>? onTapOutside;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
-      
       focusNode: focusNode,
       obscureText: obscureText,
       enabled: enabled,
@@ -62,7 +62,6 @@ class InputField extends StatelessWidget {
       style: AppTextStyles.paragraphSubTextRegular3.adaptiveColor(context),
       onTap: onTap,
       decoration: InputDecoration(
-  
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,
