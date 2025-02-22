@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hero_market/core/common/app/cache_helper.dart';
 import 'package:hero_market/core/common/singletons/cache.dart';
-import 'package:hero_market/core/common/widgets/ecomly_logo.dart';
+import 'package:hero_market/core/common/widgets/hero_logo.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 import 'package:hero_market/src/user/presentation/app/adapter/cubit/auth_user_cubit.dart';
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         },
         child: const Scaffold(
           backgroundColor: AppColors.lightThemePrimaryColor,
-          body: Center(child: EcomlyLogo()),
+          body: Center(child: HeroLogo()),
         ),
       ),
     );
