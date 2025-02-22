@@ -203,6 +203,36 @@ We've added a **Card Bottom Sheet** to enhance user interaction! 🚀
 
 ---
 
+### 🆕 Home View UI (New Feature 🎉)
+
+We've added a **Home View** to enhance user interaction! 🚀
+
+✨ Features
+
+🖼️ Display Products: Browse through a wide range of products with an intuitive interface.
+
+🔍 Search for Products: Easily find what you're looking for with a powerful search bar.
+
+🛒 Add to Cart: Seamlessly add products to your cart for a smooth shopping experience.
+
+✅ Home Screen Feature: A user-friendly home screen designed for quick navigation.
+
+🔎 Search Bar: Effortlessly discover products with a dedicated search bar.
+
+🎉 Promotional Banners: Highlight special discounts and offers with eye-catching banners.
+
+📂 Categories: Explore products organized into categories for easy browsing.
+
+🔥 Popular Products: Discover best-selling items in a dedicated section.
+
+🆕 New Arrivals: Stay updated with the latest products added to the store.
+
+#### 🎨 UI Preview
+
+| Light Mode | Dark Mode |
+|-----------|-----------|
+| ![Light Mode](https://github.com/user-attachments/assets/4d42b99d-5884-4d1b-8dd6-605380d6664f) | ![Dark Mode](https://github.com/user-attachments/assets/4a9d11e6-f1cb-49d1-850b-2ff3db9b9b60) |
+
 ## 📚 Features
 
 - **OnBoarding Screens**
