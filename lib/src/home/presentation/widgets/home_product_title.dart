@@ -9,6 +9,8 @@ import 'package:hero_market/core/resources/styles/text.dart';
 import 'package:hero_market/core/utils/core_utils.dart';
 import 'package:hero_market/src/product/domain/entities/product.dart';
 import 'package:hero_market/src/product/presentation/widgets/color_palette.dart';
+// إضافة هذا الاستيراد إذا كنت تستخدم مدير حالة للمصادقة
+// import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 
 class HomeProductTitle extends StatelessWidget {
   const HomeProductTitle(this.product, {super.key, this.margin});
@@ -17,11 +19,17 @@ class HomeProductTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // احصل على رمز المصادقة من مدير الحالة إذا كان متاحًا
+    // هذا مثال فقط، قد تحتاج لتعديله حسب هيكل تطبيقك
+    // final authToken = context.read<AuthCubit>().state.token;
+    
+    // بديل: إذا كان لديك رمز مصادقة مخزن في مكان آخر مثل SharedPreferences أو GetStorage
+    // يمكنك الوصول إليه هنا
+    
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {},
       child: Container(
-      
         width: 196,
         margin: margin,
         padding: const EdgeInsets.all(5),
@@ -29,7 +37,7 @@ class HomeProductTitle extends StatelessWidget {
             color: CoreUtils.adaptiveColor(context,
                 lightModeColor: AppColors.lightThemeWhiteColor,
                 darkModeColor: AppColors.darkThemeDarkSharpColor),
-            borderRadius: BorderRadius.circular(20)),
+            borderRadius: BorderRadius.circular(16)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +51,39 @@ class HomeProductTitle extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: const Color(0xfff0f0f0),
                       borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: NetworkImage(product.image),
+                    ),
+                    // استخدام Image بدلاً من DecorationImage للتمكن من إضافة رؤوس
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        
+                        product.image,
+                        fit: BoxFit.cover,
+                        // إضافة رؤوس المصادقة
+                      
+                        // إضافة معالج الأخطاء
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: Colors.grey[300],
+                            child: const Icon(
+                              Icons.error_outline,
+                              color: Colors.red,
+                            ),
+                          );
+                        },
+                        // إضافة مؤشر تحميل
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator.adaptive(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                              backgroundColor: AppColors.lightThemePrimaryColor,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),

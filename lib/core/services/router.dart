@@ -13,6 +13,7 @@ import 'package:hero_market/src/cart/presentation/views/cart_view.dart';
 import 'package:hero_market/src/dashboard/presentation/views/dashboard_screen.dart';
 import 'package:hero_market/src/explore/presentation/views/explore_view.dart';
 import 'package:hero_market/src/on_boarding/presentation/screens/on_boarding_screen.dart';
+import 'package:hero_market/src/product/presentation/app/adapter/cubit/product_cubit.dart';
 import 'package:hero_market/src/user/presentation/app/adapter/cubit/auth_user_cubit.dart';
 import 'package:hero_market/src/user/presentation/views/payment_profile_view.dart';
 import '../../src/auth/presentation/app/adapter/cubit/auth_cubit.dart';

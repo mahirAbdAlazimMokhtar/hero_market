@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hero_market/src/home/presentation/sections/home_app_bar.dart';
 import 'package:hero_market/src/home/presentation/sections/product_section.dart';
 import 'package:hero_market/src/home/presentation/widgets/promo_banner.dart';
+import 'package:hero_market/src/product/presentation/app/adapter/cubit/product_cubit.dart';
 
-
+import '../../../../core/services/injection_container.dart';
 import '../sections/category_section.dart';
 import '../sections/search_section.dart';
 
 class HomeViews extends StatelessWidget {
-  HomeViews({super.key});
+  const HomeViews({super.key});
   static const path = '/home';
 
   @override
@@ -35,16 +37,22 @@ class HomeViews extends StatelessWidget {
                   const Gap(20),
                   CategorySection(),
                   const Gap(20),
-                  ProductSection.popular(
-                    onViewAll: () {
-                      //TODO : push to popular screen
-                    },
+                  BlocProvider(
+                    create: (_) => sl<ProductCubit>(),
+                    child: ProductSection.popular(
+                      onViewAll: () {
+                        //TODO : push to popular screen
+                      },
+                    ),
                   ),
                   const Gap(20),
-                  ProductSection.newArrivals(
-                    onViewAll: () {
-                      //TODO : push to newArrivals screen
-                    },
+                  BlocProvider(
+                    create: (context) => sl<ProductCubit>(),
+                    child: ProductSection.newArrivals(
+                      onViewAll: () {
+                        //TODO : push to newArrivals screen
+                      },
+                    ),
                   ),
                   //New Arrivals Section
                 ],

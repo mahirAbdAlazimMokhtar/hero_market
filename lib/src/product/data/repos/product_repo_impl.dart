@@ -20,7 +20,7 @@ class ProductRepoImpl implements ProductRepo {
       return Right(result);
     } on ServerException catch (e) {
       return Left(
-        ServerFailure(message: e.message, statusCode: e.statusCode),
+        ServerFailure.fromException(e),
       );
     }
   }

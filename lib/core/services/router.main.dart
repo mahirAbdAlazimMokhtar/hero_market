@@ -8,46 +8,45 @@ final router = GoRouter(
   //First screen
   initialLocation: '/',
   routes: [
-  GoRoute(
-  path: '/',
-  redirect: (context, state) {
-    final cacheHelper = sl<CacheHelper>()
-      ..getSessionToken()
-      ..getUserId();
-    
-    final sessionToken = Cache.instance.sessionToken;
-    final userId = Cache.instance.userId;
-    
-    
-    if ((sessionToken == null || userId == null) && !cacheHelper.isFirstTime()) {
-      return LoginScreen.path;
-    }
+    GoRoute(
+      path: '/',
+      redirect: (context, state) {
+        final cacheHelper = sl<CacheHelper>()
+          ..getSessionToken()
+          ..getUserId();
 
-    if (state.extra == 'home') {
-      return HomeViews.path;
-    }
+        final sessionToken = Cache.instance.sessionToken;
+        final userId = Cache.instance.userId;
 
-    return null;
-  },
-  builder: (_, __) {
-    final cacheHelper = sl<CacheHelper>()
-      ..getSessionToken()
-      ..getUserId();
+        if ((sessionToken == null || userId == null) &&
+            !cacheHelper.isFirstTime()) {
+          return LoginScreen.path;
+        }
 
-    
-    if (cacheHelper.isFirstTime()) {
-      return const OnBoardingScreen();
-    }
+        if (state.extra == 'home') {
+          return HomeViews.path;
+        }
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => sl<AuthCubit>()),
-        BlocProvider(create: (_) => sl<AuthUserCubit>()),
-      ],
-      child: const SplashScreen(),
-    );
-  },
-),
+        return null;
+      },
+      builder: (_, __) {
+        final cacheHelper = sl<CacheHelper>()
+          ..getSessionToken()
+          ..getUserId();
+
+        if (cacheHelper.isFirstTime()) {
+          return const OnBoardingScreen();
+        }
+
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<AuthCubit>()),
+            BlocProvider(create: (_) => sl<AuthUserCubit>()),
+          ],
+          child: const SplashScreen(),
+        );
+      },
+    ),
     GoRoute(
       path: LoginScreen.path,
       builder: (_, __) => BlocProvider(
@@ -91,7 +90,12 @@ final router = GoRouter(
         return DashboardScreen(state: state, child: child);
       },
       routes: [
-        GoRoute(path: HomeViews.path, builder: (_, __) =>  HomeViews()),
+        GoRoute(
+            path: HomeViews.path,
+            builder: (_, __) => BlocProvider(
+                  create: (_) => sl<ProductCubit>(),
+                  child: HomeViews(),
+                )),
         GoRoute(
             path: ExploreView.path, builder: (_, __) => const ExploreView()),
         GoRoute(

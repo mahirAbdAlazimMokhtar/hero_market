@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:hero_market/core/extensions/color_extension.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/utils/typedefs.dart';
@@ -22,39 +22,6 @@ class ProductModel extends Product {
       required super.numOfReviews,
       super.genderAgeCategory});
 
-  ProductModel copyWith({
-    String? id,
-    String? name,
-    String? image,
-    String? description,
-    double? price,
-    ProductCategoryModel? category,
-    double? rating,
-    List<Color>? colors,
-    List<String>? images,
-    List<String>? sizes,
-    List<String>? reviewIds,
-    String? genderAgeCategory,
-    int? countInStock,
-    int? numOfReviews,
-  }) {
-    return ProductModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      image: image ?? this.image,
-      description: description ?? this.description,
-      price: price ?? this.price,
-      category: category ?? this.category,
-      rating: rating ?? this.rating,
-      colors: colors ?? this.colors,
-      images: images ?? this.images,
-      sizes: sizes ?? this.sizes,
-      reviewIds: reviewIds ?? this.reviewIds,
-      countInStock: countInStock ?? this.countInStock,
-      numOfReviews: numOfReviews ?? this.numOfReviews,
-      genderAgeCategory: genderAgeCategory ?? this.genderAgeCategory,
-    );
-  }
 
   const ProductModel.empty()
       : this(
@@ -99,24 +66,26 @@ class ProductModel extends Product {
     final reviewIds = map['reviewIds'] as List<dynamic>?;
     final category = map['category'];
     return ProductModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      image: map['image'] as String,
-      description: map['description'] as String,
-      price: (map['price'] as num).toDouble(),
-      category: category is String
-          ? ProductCategoryModel(id: category)
-          : ProductCategoryModel.fromMap(category as DataMap),
-      rating: (map['rating'] as num).toDouble(),
+     id: map['id'] as String? ?? '',
+name: map['name'] as String? ?? '',
+image: map['image'] as String? ?? '',
+description: map['description'] as String? ?? '',
+      price: (map['price'] as num?)?.toDouble() ?? 0.0,
+     category: category == null
+    ? const ProductCategoryModel.empty()
+    : (category is String
+        ? ProductCategoryModel(id: category)
+        : ProductCategoryModel.fromMap(category as DataMap)),
+    rating: (map['rating'] as num?)?.toDouble() ?? 0.0,
       colors: colors == null
           ? []
           : List<String>.from(colors).map((hex) => hex.colors).toList(),
       images: images == null ? [] : List<String>.from(images),
       sizes: sizes == null ? [] : List<String>.from(sizes),
       reviewIds: reviewIds == null ? [] : List<String>.from(reviewIds),
-      countInStock: (map['countInStock'] as num).toInt(),
-      numOfReviews: (map['numOfReviews'] as num).toInt(),
-      genderAgeCategory: map['genderAgeCategory'] as String,
+      countInStock: (map['countInStock'] as num?)?.toInt() ?? 0,
+      numOfReviews: (map['numOfReviews'] as num?)?.toInt() ?? 0,
+      genderAgeCategory: map['genderAgeCategory'] as String? ?? '',
     );
   }
 }
