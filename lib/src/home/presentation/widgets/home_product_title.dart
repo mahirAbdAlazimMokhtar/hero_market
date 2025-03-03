@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hero_market/core/common/widgets/favorite_icon.dart';
 import 'package:hero_market/core/extensions/string_extensions.dart';
 import 'package:hero_market/core/extensions/text_style_extensions.dart';
@@ -9,8 +10,6 @@ import 'package:hero_market/core/resources/styles/text.dart';
 import 'package:hero_market/core/utils/core_utils.dart';
 import 'package:hero_market/src/product/domain/entities/product.dart';
 import 'package:hero_market/src/product/presentation/widgets/color_palette.dart';
-// إضافة هذا الاستيراد إذا كنت تستخدم مدير حالة للمصادقة
-// import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 
 class HomeProductTitle extends StatelessWidget {
   const HomeProductTitle(this.product, {super.key, this.margin});
@@ -19,16 +18,9 @@ class HomeProductTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // احصل على رمز المصادقة من مدير الحالة إذا كان متاحًا
-    // هذا مثال فقط، قد تحتاج لتعديله حسب هيكل تطبيقك
-    // final authToken = context.read<AuthCubit>().state.token;
-    
-    // بديل: إذا كان لديك رمز مصادقة مخزن في مكان آخر مثل SharedPreferences أو GetStorage
-    // يمكنك الوصول إليه هنا
-    
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {},
+      onTap:  () => context.push('/products/${product.id}'),
       child: Container(
         width: 196,
         margin: margin,
@@ -56,11 +48,10 @@ class HomeProductTitle extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(
-                        
                         product.image,
                         fit: BoxFit.cover,
                         // إضافة رؤوس المصادقة
-                      
+
                         // إضافة معالج الأخطاء
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -89,7 +80,7 @@ class HomeProductTitle extends StatelessWidget {
                   ),
                   Positioned(
                     right: 0,
-                    child: FavoriteIcon(productId: product.id),
+                    child: FavoriteIconMain(productId: product.id),
                   ),
                 ],
               ),
@@ -106,7 +97,9 @@ class HomeProductTitle extends StatelessWidget {
                   if (product.colors.isNotEmpty)
                     Flexible(
                         child: ColorPalette(
-                            colors: product.colors.take(3).toList(), radius: 5))
+                      colors: product.colors.take(3).toList(),
+                      radius: 5,
+                    ))
                 ],
               ),
             ),

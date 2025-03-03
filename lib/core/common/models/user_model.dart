@@ -4,8 +4,8 @@ import 'package:hero_market/core/common/entities/user.dart';
 import 'package:hero_market/core/utils/typedefs.dart';
 import 'package:hero_market/core/common/models/address_model.dart';
 
-import '../../../src/wishlist/data_layer/models/wishlist_product_model.dart';
-import '../../../src/wishlist/domain_layer/entities/wishlist_product.dart';
+import '../../../src/wishlist/data/models/wishlist_product_model.dart';
+import '../../../src/wishlist/domain/entities/wishlist_product.dart';
 import '../entities/address.dart';
 class UserModel extends User {
   const UserModel({

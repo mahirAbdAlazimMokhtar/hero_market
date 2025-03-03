@@ -110,9 +110,20 @@ final router = GoRouter(
         parentNavigatorKey: rootNavigatorKey,
         path: CartView.path,
         builder: (_, __) => const CartView()),
+ GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: SearchView.path,
+      builder: (_, state) => BlocProvider(
+        create: (_) => sl<ProductCubit>(),
+        child: ChangeNotifierProvider(
+          create: (_) => SearchControllers(),
+          child: const SearchView(),
+        ),
+      ),
+    ),
     GoRoute(
         parentNavigatorKey: rootNavigatorKey,
-        path: PaymentProfileView.path,
+        path: SearchView.path,
         builder: (_, state) => PaymentProfileView(
               sessionUrl: state.extra as String,
             )),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../../../../core/utils/typedefs.dart';
-import '../../domain_layer/entities/wishlist_product.dart';
+import '../../domain/entities/wishlist_product.dart';
 
 
 class WishlistProductModel extends WishlistProduct {
@@ -43,10 +43,12 @@ class WishlistProductModel extends WishlistProduct {
 
   WishlistProductModel.fromMap(DataMap map)
       : this(
-          productId: map['productId'] as String,
-          productName: map['productName'] as String,
-          productImage: map['productImage'] as String,
-          productPrice: (map['productPrice'] as num).toDouble(),
+          productId: map['productId'] as String? ?? '',
+          productName: map['productName'] as String? ?? '',
+          productImage: map['productImage'] as String? ?? '',
+          productPrice: (map['productPrice'] != null) 
+              ? (map['productPrice'] as num).toDouble() 
+              : 0.0,
           productExists: map['productExists'] as bool? ?? true,
           productOutOfStock: map['productOutOfStock'] as bool? ?? false,
         );

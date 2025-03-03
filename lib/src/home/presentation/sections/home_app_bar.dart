@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hero_market/core/common/widgets/app_bar_bottom.dart';
 import 'package:hero_market/core/common/widgets/hero_logo.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/core/resources/styles/text.dart';
+import 'package:hero_market/core/utils/global_interface_adapters.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../../core/common/widgets/menu_icon.dart';
@@ -29,7 +31,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        ReactiveCartIcon(),
+        BlocProvider(
+          create: (context) => GlobalInterfaceAdapters.homeCarCubit,
+          child: ReactiveCartIcon(),
+        ),
         const Gap(20),
         Icon(
           IconlyBold.scan,

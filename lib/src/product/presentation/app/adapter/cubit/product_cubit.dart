@@ -162,11 +162,10 @@ class ProductCubit extends Cubit<ProductState> {
   Future<void> searchAllProducts({
     required String query,
     required int page,
-    required String categoryId,
   }) async {
     emit(SearchingProduct());
     final result = await _searchAllProducts(SearchAllProductsParams(
-        query: query, page: page, categoryId: categoryId));
+        query: query, page: page));
     result.fold((failure) => emit(ProductError(failure.errorMessage)),
         (products) => emit(ProductsFetched(products)));
   }

@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.lightThemeTintStockColor,
           foregroundColor: AppColors.lightThemePrimaryColor),
       useMaterial3: true,
+      chipTheme: ChipThemeData(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+      )
     );
     return ChangeNotifierProvider(
         create: (_) => sl<UserProvider>(),

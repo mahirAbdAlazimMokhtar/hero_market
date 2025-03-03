@@ -7,6 +7,8 @@ Future<void> init() async {
   await _authInit();
   await _userInit();
   await _productInit();
+  await _cartInit();
+  await _wishlistInit();
 }
 
 Future<void> _productInit() async {
@@ -82,10 +84,51 @@ Future<void> _authInit() async {
         () => AuthRepositoryImplementation(sl()))
     ..registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImplementation(sl()))
-    ..registerLazySingleton(() => UserProvider.instance)
+    ..registerLazySingleton(UserProvider.new)
     ..registerLazySingleton(http.Client.new);
 }
-
+Future<void> _cartInit() async {
+  sl
+    ..registerFactory(
+      () => CartCubit(
+        addToCart: sl(),
+        changeCartProductQuantity: sl(),
+        getCart: sl(),
+        getCartCount: sl(),
+        getCartProduct: sl(),
+        removeFromCart: sl(),
+        initiateCheckout: sl(),
+      ),
+    )
+    ..registerLazySingleton(() => AddToCart(sl()))
+    ..registerLazySingleton(() => ChangeCartProductQuantity(sl()))
+    ..registerLazySingleton(() => GetCart(sl()))
+    ..registerLazySingleton(() => GetCartCount(sl()))
+    ..registerLazySingleton(() => GetCartProduct(sl()))
+    ..registerLazySingleton(() => RemoveFromCart(sl()))
+    ..registerLazySingleton(() => InitiateCheckout(sl()))
+    ..registerLazySingleton<CartRepo>(() => CartRepoImpl(sl()))
+    ..registerLazySingleton<CartRemoteDataSrc>(
+      () => CartRemoteDataSrcImpl(sl()),
+    );
+}
+Future<void> _wishlistInit() async {
+  sl
+    ..registerFactory(
+      () => WishlistCubit(
+        addToWishlist: sl(),
+        getWishlist: sl(),
+        removeFromWishlist: sl(),
+      ),
+    )
+    ..registerLazySingleton(() => AddToWishlist(sl()))
+    ..registerLazySingleton(() => GetWishlist(sl()))
+    ..registerLazySingleton(() => RemoveFromWishlist(sl()))
+    ..registerLazySingleton<WishlistRepo>(() => WishlistRepoImpl(sl()))
+    ..registerLazySingleton<WishlistRemoteDataSrc>(
+      () => WishlistRemoteDataSrcImpl(sl()),
+    );
+}
 Future<void> _cacheInit() async {
   final prefs = await SharedPreferences.getInstance();
 

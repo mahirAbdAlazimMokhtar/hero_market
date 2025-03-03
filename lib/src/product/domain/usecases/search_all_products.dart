@@ -18,16 +18,15 @@ class SearchAllProducts
 }
 
 class SearchAllProductsParams extends Equatable {
-  final String categoryId;
   final String query;
   final int page;
 
   const SearchAllProductsParams({
-    required this.categoryId,
+
     required this.query,
     required this.page,
   });
 
   @override
-  List<Object?> get props => [categoryId, query, page];
+  List<Object?> get props => [ query, page];
 }

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hero_market/core/usecase/usecase.dart';
-import 'package:hero_market/src/wishlist/domain_layer/repository/wishlist_repo.dart';
+import 'package:hero_market/src/wishlist/domain/repository/wishlist_repo.dart';
 
-import '../../../core/utils/typedefs.dart';
+import '../../../../core/utils/typedefs.dart';
 
 class AddToWishlist extends UsecasesWithParams<void, AddToWishlistParams> {
   const AddToWishlist(this._repo);

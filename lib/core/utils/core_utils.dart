@@ -8,7 +8,7 @@ import '../resources/styles/colors.dart';
 abstract class CoreUtils {
   const CoreUtils();
   static void showSnackBar(
-    BuildContext context, {
+    BuildContext context,{
     required String message,
     Color? backgroundColor,
   }) {

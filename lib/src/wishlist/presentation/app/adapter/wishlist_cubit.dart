@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 
 import 'package:equatable/equatable.dart';
 
-import '../../../domain_layer/add_to_wishlist.dart';
-import '../../../domain_layer/entities/wishlist_product.dart';
-import '../../../domain_layer/get_wishlist.dart';
-import '../../../domain_layer/remove_wishlist.from.dart';
+import '../../../domain/usecases/add_to_wishlist.dart';
+import '../../../domain/entities/wishlist_product.dart';
+import '../../../domain/usecases/get_wishlist.dart';
+import '../../../domain/usecases/remove_wishlist.from.dart';
 
 part 'wishlist_state.dart';
 

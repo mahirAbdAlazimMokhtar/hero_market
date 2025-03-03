@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hero_market/src/home/presentation/sections/home_app_bar.dart';
 import 'package:hero_market/src/home/presentation/sections/product_section.dart';
 import 'package:hero_market/src/home/presentation/widgets/promo_banner.dart';
 import 'package:hero_market/src/product/presentation/app/adapter/cubit/product_cubit.dart';
+import 'package:hero_market/src/product/presentation/screen/search_view.dart';
 
 import '../../../../core/services/injection_container.dart';
 import '../sections/category_section.dart';
@@ -24,8 +26,9 @@ class HomeViews extends StatelessWidget {
             children: [
               const Gap(40),
               SearchSection(
+                readOnly: true,
                 onTap: () {
-                  //TODO : push to search screen
+                  context.push(SearchView.path);
                 },
               ),
               const Gap(20),

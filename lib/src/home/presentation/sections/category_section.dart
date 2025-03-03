@@ -17,23 +17,20 @@ class CategorySection extends StatefulWidget {
 }
 
 class _CategorySectionState extends State<CategorySection> {
-    List<ProductCategory> categories = [];
+  List<ProductCategory> categories = [];
   @override
   void initState() {
     context.read<ProductCubit>().getCategories();
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProductCubit, ProductState>(
       listener: (context, state) {
-        if(state case CategoriesFetched(:final categories)){
-           print("Categories received: ${categories.length}");
+        if (state case CategoriesFetched(:final categories)) {
           this.categories = categories;
-        } else if(state case ProductError(:final message)){
+        } else if (state case ProductError(:final message)) {
           CoreUtils.showSnackBar(context, message: message);
         }
       },
@@ -48,37 +45,39 @@ class _CategorySectionState extends State<CategorySection> {
           return SizedBox(
             height: 95,
             child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  final category = categories[index];
-                  return GestureDetector(
-                    onTap: () {
-                      // TODO (Categories) : Push to categories screen
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor:category.image == null ?
-                          AppColors.lightThemeSecondaryColor : null,
-                          backgroundImage:category.image == null ? null :
-                              NetworkImage(category.image!),
-                        ),
-                        const Gap(3),
-                        Text(
-                          category.name!,
-                          style: AppTextStyles.paragraphSubTextRegular1
-                              .adaptiveColor(context),
-                        )
-                      ],
-                    ),
-                  );
-                },
-                separatorBuilder: (_, __) => const Gap(20),
-                ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                final category = categories[index];
+                return GestureDetector(
+                  onTap: () {
+                    // TODO (Categories) : Push to categories screen
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: category.image == null
+                            ? AppColors.lightThemeSecondaryColor
+                            : null,
+                        backgroundImage: category.image == null
+                            ? null
+                            : NetworkImage(category.image!),
+                      ),
+                      const Gap(3),
+                      Text(
+                        category.name!,
+                        style: AppTextStyles.paragraphSubTextRegular1
+                            .adaptiveColor(context),
+                      )
+                    ],
+                  ),
+                );
+              },
+              separatorBuilder: (_, __) => const Gap(20),
+            ),
           );
         }
         return SizedBox.shrink();

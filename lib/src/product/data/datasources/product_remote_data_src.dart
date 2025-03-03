@@ -535,57 +535,69 @@ Future<List<ProductModel>> getPopular({
     }
   }
 
-  @override
-  Future<List<ProductModel>> searchByCategoryAndGenderAgeCategory({
-    required String query,
-    required String categoryId,
-    required String genderAgeCategory,
-    required int page,
-  }) async {
-    try {
-      const endpoint = '${NetworkConstants.apiUrl}$SEARCH_PRODUCTS_ENDPOINT';
+ @override
+Future<List<ProductModel>> searchByCategoryAndGenderAgeCategory({
+  required String query,
+  required String categoryId,
+  required String genderAgeCategory,
+  required int page,
+}) async {
+  try {
+    const endpoint = '${NetworkConstants.apiUrl}$SEARCH_PRODUCTS_ENDPOINT';
 
-      final queryParams = {
-        'q': query,
-        'category': categoryId,
-        'genderAgeCategory': genderAgeCategory,
-        'page': '$page'
-      };
-      final uri = NetworkConstants.baseUrl.startsWith('https')
-          ? Uri.https(NetworkConstants.authority, endpoint, queryParams)
-          : Uri.http(NetworkConstants.authority, endpoint, queryParams);
+    final queryParams = {
+      'q': query,
+      'category': categoryId,
+      'genderAgeCategory': genderAgeCategory,
+      'page': '$page'
+    };
 
-      final response = await _client.get(
-        uri,
-        headers: Cache.instance.sessionToken!.toAuthHeaders,
-      );
-      final payload = jsonDecode(response.body);
-      await NetworkUtils.renewToken(response);
-      if (response.statusCode != 200) {
-        final errorResponse = ErrorResponse.fromMap(payload as DataMap);
-        debugPrint(response.body);
-        debugPrintStack();
-        throw ServerException(
-          message: errorResponse.errorMessage,
-          statusCode: response.statusCode,
-        );
-      }
-      payload as List<dynamic>;
-      return payload
-          .cast<DataMap>()
-          .map((product) => ProductModel.fromMap(product))
-          .toList();
-    } on ServerException {
-      rethrow;
-    } catch (e, s) {
-      debugPrint(e.toString());
-      debugPrintStack(stackTrace: s);
-      throw const ServerException(
-        message: "Error Occurred: It's not your fault, it's ours",
-        statusCode: 500,
+    final uri = NetworkConstants.baseUrl.startsWith('https')
+        ? Uri.https(NetworkConstants.authority, endpoint, queryParams)
+        : Uri.http(NetworkConstants.authority, endpoint, queryParams);
+
+    print("Requesting: $uri");
+    final response = await _client.get(
+      uri,
+      headers: Cache.instance.sessionToken!.toAuthHeaders,
+    );
+
+    print("Response Body: ${response.body}");
+    final payload = jsonDecode(response.body);
+    await NetworkUtils.renewToken(response);
+
+    if (response.statusCode != 200) {
+      final errorResponse = ErrorResponse.fromMap(payload as DataMap);
+      debugPrint(response.body);
+      debugPrintStack();
+      throw ServerException(
+        message: errorResponse.errorMessage,
+        statusCode: response.statusCode,
       );
     }
+
+    if (payload is! List) {
+      throw ServerException(
+        message: "Invalid response format from server",
+        statusCode: response.statusCode,
+      );
+    }
+
+    return payload
+        .cast<DataMap>()
+        .map((product) => ProductModel.fromMap(product))
+        .toList();
+  } on ServerException {
+    rethrow;
+  } catch (e, s) {
+    debugPrint(e.toString());
+    debugPrintStack(stackTrace: s);
+    throw const ServerException(
+      message: "Error Occurred: It's not your fault, it's ours",
+      statusCode: 500,
+    );
   }
+}
 
   @override
   Future<void> leaveReview({

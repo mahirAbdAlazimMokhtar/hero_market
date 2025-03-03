@@ -31,7 +31,7 @@ class AuthUserCubit extends Cubit<AuthUserState> {
     emit(const GettingUserData());
     final result = await _getUser(userId);
     result.fold((failure) => emit(AuthUserError(failure.errorMessage)), (user) {
-      _userProvider.setUser(user);
+      _userProvider.updateUser(user);
       emit(FetchedUser(user));
     });
   }

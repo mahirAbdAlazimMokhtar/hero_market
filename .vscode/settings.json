@@ -9,5 +9,9 @@
         "usecase"
     ],
     "cmake.sourceDirectory": "/Users/mahirmokhtr/Documents/flutter-projects/hero_market/windows/flutter",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
+    }
 }
