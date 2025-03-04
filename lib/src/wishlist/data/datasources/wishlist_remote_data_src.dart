@@ -98,7 +98,7 @@ Future<void> addToWishlist({
     final endpoint = '${NetworkConstants.apiUrl}/users/$userId/wishlist';
     debugPrint('Constructed endpoint: $endpoint');
     
-    final uri = Uri.http(
+    final uri = Uri.https(
       NetworkConstants.authority,
       endpoint,
     );
@@ -161,7 +161,7 @@ Future<void> addToWishlist({
     required String productId,
   }) async {
     try {
-      final uri = Uri.http(
+      final uri = Uri.https(
         NetworkConstants.authority,
         '${NetworkConstants.apiUrl}${_userWishlistEndpoint(userId)}/$productId',
       );

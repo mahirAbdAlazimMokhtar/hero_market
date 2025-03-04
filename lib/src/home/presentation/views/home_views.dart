@@ -6,9 +6,11 @@ import 'package:hero_market/src/home/presentation/sections/home_app_bar.dart';
 import 'package:hero_market/src/home/presentation/sections/product_section.dart';
 import 'package:hero_market/src/home/presentation/widgets/promo_banner.dart';
 import 'package:hero_market/src/product/presentation/app/adapter/cubit/product_cubit.dart';
+import 'package:hero_market/src/product/presentation/screen/all_popular_products_views.dart';
 import 'package:hero_market/src/product/presentation/screen/search_view.dart';
 
 import '../../../../core/services/injection_container.dart';
+import '../../../product/presentation/screen/all_new_arrivals_views.dart';
 import '../sections/category_section.dart';
 import '../sections/search_section.dart';
 
@@ -44,18 +46,17 @@ class HomeViews extends StatelessWidget {
                     create: (_) => sl<ProductCubit>(),
                     child: ProductSection.popular(
                       onViewAll: () {
-                        //TODO : push to popular screen
+                        context.go('${HomeViews.path}/${AllPopularView.path}');
                       },
                     ),
                   ),
                   const Gap(20),
                   BlocProvider(
                     create: (context) => sl<ProductCubit>(),
-                    child: ProductSection.newArrivals(
-                      onViewAll: () {
-                        //TODO : push to newArrivals screen
-                      },
-                    ),
+                    child: ProductSection.newArrivals(onViewAll: () {
+                      context
+                          .go('${HomeViews.path}/${AllNewArrivalsView.path}');
+                    }),
                   ),
                   //New Arrivals Section
                 ],

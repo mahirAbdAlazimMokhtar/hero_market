@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hero_market/core/extensions/text_style_extensions.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/core/utils/core_utils.dart';
 import 'package:hero_market/src/cart/presentation/app/adapter/cart_cubit.dart';

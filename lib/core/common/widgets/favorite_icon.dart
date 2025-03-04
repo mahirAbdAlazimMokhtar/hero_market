@@ -77,9 +77,9 @@ class _FavoriteIconContent extends StatelessWidget {
           );
         }
 
-        final isFavorite = user.wishlist.any(
-          (product) => product.productId == productId,
-        );
+        // final isFavorite = user.wishlist.any(
+        //   (product) => product.productId == productId,
+        // );
 
         return BlocConsumer<AuthUserCubit, AuthUserState>(
           listener: (context, authUserState) {
@@ -88,6 +88,13 @@ class _FavoriteIconContent extends StatelessWidget {
             }
           },
           builder: (context, authUserState) {
+              bool isFavorite = false;
+  
+  if (authUserState is FetchedUser) {
+    isFavorite = authUserState.user.wishlist.any(
+      (product) => product.productId == productId,
+    );
+  }
             return BlocConsumer<WishlistCubit, WishlistState>(
               listener: (context, wishlistState) {
                 if (wishlistState is AddedToWishlist ||

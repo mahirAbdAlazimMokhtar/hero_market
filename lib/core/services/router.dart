@@ -22,6 +22,8 @@ import 'package:provider/provider.dart';
 import '../../src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 import '../../src/home/presentation/views/home_views.dart';
 
+import '../../src/product/presentation/screen/all_new_arrivals_views.dart';
+import '../../src/product/presentation/screen/all_popular_products_views.dart';
 import '../../src/user/presentation/views/profile_view.dart';
 import '../../src/wishlist/presentation/views/wishlist_view.dart';
 import '../common/singletons/cache.dart';

@@ -92,6 +92,28 @@ final router = GoRouter(
       routes: [
         GoRoute(
             path: HomeViews.path,
+            routes: [
+            GoRoute(
+              path: AllNewArrivalsView.path,
+              builder: (_, __) => ChangeNotifierProvider(
+                create: (context) => SearchControllers(),
+                child: BlocProvider(
+                  create: (_) => sl<ProductCubit>(),
+                  child: const AllNewArrivalsView(),
+                ),
+              ),
+            ),
+            GoRoute(
+              path: AllPopularView.path,
+              builder: (_, __) => ChangeNotifierProvider(
+                create: (context) => SearchControllers(),
+                child: BlocProvider(
+                  create: (_) => sl<ProductCubit>(),
+                  child: const AllPopularView(),
+                ),
+              ),
+            ),
+          ],
             builder: (_, __) => BlocProvider(
                   create: (_) => sl<ProductCubit>(),
                   child: HomeViews(),
@@ -101,7 +123,9 @@ final router = GoRouter(
         GoRoute(
             path: WishlistView.path, builder: (_, __) => const WishlistView()),
       ],
+      
     ),
+
     GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: ProfileView.path,
@@ -110,17 +134,38 @@ final router = GoRouter(
         parentNavigatorKey: rootNavigatorKey,
         path: CartView.path,
         builder: (_, __) => const CartView()),
- GoRoute(
+    GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: SearchView.path,
-      builder: (_, state) => BlocProvider(
-        create: (_) => sl<ProductCubit>(),
+      builder: (_, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: sl<
+                ProductCubit>(), // استخدام نفس الكيوبت بدلاً من إنشائه من جديد
+          ),
+        ],
         child: ChangeNotifierProvider(
           create: (_) => SearchControllers(),
           child: const SearchView(),
         ),
       ),
     ),
+
+    //    GoRoute(
+    //   parentNavigatorKey: rootNavigatorKey,
+    //   path: '/products/:productId',
+    //   builder: (_, state) {
+    //     return MultiBlocProvider(
+    //       providers: [
+    //         BlocProvider(create: (_) => sl<ProductCubit>()),
+    //         BlocProvider(create: (_) => sl<CartCubit>()),
+    //       ],
+    //       child: ProductDetailsView(
+    //         state.pathParameters['productId'] as String,
+    //       ),
+    //     );
+    //   },
+    // ),
     GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: SearchView.path,

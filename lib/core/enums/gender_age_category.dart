@@ -2,8 +2,8 @@ enum GenderAgeCategory {
   all('All'),
   men('Men'),
   women('Women'),
-  unisex('Unisex'),
-  kids('Kids');
+  kids('Kids'),
+  unisex('Animals & Pets');
 
   const GenderAgeCategory(this.value);
   final String value;

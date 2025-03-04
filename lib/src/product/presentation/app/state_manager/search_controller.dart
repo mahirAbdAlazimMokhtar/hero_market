@@ -35,33 +35,38 @@ class SearchControllers extends ChangeNotifier {
 
   final int _page = 1;
 
-  void search({required ProductCubit productAdapter}) {
-    if (_selectedCategory.name!.toLowerCase() != 'all') {
-      // means that the genderAgeCategory is considered
-      if (_selectedGenderAgeCategory.value.toLowerCase() != 'all') {
-        // means we have a specification and they are
-        // both not [all]
-        productAdapter.searchByCategoryAndGenderAgeCategory(
-          query: searchController.text.trim(),
-          categoryId: _selectedCategory.id,
-          genderAgeCategory: _selectedGenderAgeCategory.value.toLowerCase(),
-          page: _page,
-        );
-      } else {
-        // means we have only category specified
-        productAdapter.searchByCategory(
-          query: searchController.text.trim(),
-          categoryId: _selectedCategory.id,
-          page: _page,
-        );
-      }
+void search({required ProductCubit productAdapter}) {
+  final query = _queryController.text.trim(); // استخدم نفس `queryController`
+
+  if (query.isEmpty) return; // تجنب البحث إذا كان الإدخال فارغًا
+
+  final int page = 1; // إعادة تعيين الصفحة عند البحث الجديد
+
+  if (_selectedCategory.name!.toLowerCase() != 'all') {
+    if (_selectedGenderAgeCategory.value.toLowerCase() != 'all') {
+      productAdapter.searchByCategoryAndGenderAgeCategory(
+        query: query,
+        categoryId: _selectedCategory.id,
+        genderAgeCategory: _selectedGenderAgeCategory.value.toLowerCase(),
+        page: page,
+      );
     } else {
-      productAdapter.searchAllProducts(
-        query: searchController.text.trim(),
-        page: _page,
+      productAdapter.searchByCategory(
+        query: query,
+        categoryId: _selectedCategory.id,
+        page: page,
       );
     }
+  } else {
+    productAdapter.searchAllProducts(
+      query: query,
+      page: page,
+    );
   }
+
+  notifyListeners(); // تأكد من تحديث الواجهة بعد البحث
+}
+
 
   @override
   void dispose() {

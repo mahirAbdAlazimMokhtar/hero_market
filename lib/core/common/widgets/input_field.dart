@@ -47,10 +47,9 @@ class InputField extends StatelessWidget {
   final bool expandable;
   final BoxConstraints? suffixIconConstraints;
   final ValueChanged<PointerDownEvent>? onTapOutside;
-    final ValueChanged<String>? onSubmitted;
+  final ValueChanged<String>? onSubmitted;
 
-  @override
-  Widget build(BuildContext context) {
+  @override  Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
