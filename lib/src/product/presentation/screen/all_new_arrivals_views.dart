@@ -28,18 +28,26 @@ class AllNewArrivalsView extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 30),
-            child: BlocProvider(
-              create: (_) => sl<ProductCubit>(),
-              child: const CategorySelector(),
-            ),
+          BlocBuilder<ProductCubit, ProductState>(
+            builder: (context, state) {
+              if(state is ProductLoading){
+                return const LinearProgressIndicator();
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16)
+                    .copyWith(top: 30),
+                child: BlocProvider(
+                  create: (_) => sl<ProductCubit>(),
+                  child: const CategorySelector(),
+                ),
+              );
+            },
           ),
           const Gap(20),
           Expanded(
             child: PaginatedProductGridView(fetchRequest: (page) {
-              final category = context.read<SearchControllers>().selectedCategory;
+              final category =
+                  context.read<SearchControllers>().selectedCategory;
               String? categoryId;
               if (category.name?.toLowerCase() != 'all') {
                 categoryId = category.id;

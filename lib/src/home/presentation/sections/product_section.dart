@@ -71,7 +71,7 @@ class _ProductSectionState extends State<ProductSection> {
                         style: AppTextStyles.buttonTextHeadingSemiBold
                             .adaptiveColor(context),
                       ),
-                      if (products.isNotEmpty)
+                      if (products.length > 9)
                         IconButton.filled(
                             onPressed: widget.onViewAll,
                             style: IconButton.styleFrom(

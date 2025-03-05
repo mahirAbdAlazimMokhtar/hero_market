@@ -14,28 +14,30 @@ final class ProductInitial extends ProductState {
 final class FetchingProducts extends ProductState {
   const FetchingProducts();
 }
-
-final class FetchingProduct extends ProductState {
+final class ProductLoading extends ProductState {
+  const ProductLoading();
+}
+final class FetchingProduct extends ProductLoading {
   const FetchingProduct();
 }
 
-final class SearchingProduct extends ProductState {
+final class SearchingProduct extends ProductLoading {
   const SearchingProduct();
 }
 
-final class FetchingReviews extends ProductState {
+final class FetchingReviews extends ProductLoading {
   const FetchingReviews();
 }
 
-final class FetchingCategories extends ProductState {
+final class FetchingCategories extends ProductLoading {
   const FetchingCategories();
 }
 
-final class FetchingCategory extends ProductState {
+final class FetchingCategory extends ProductLoading {
   const FetchingCategory();
 }
 
-final class Reviewing extends ProductState {
+final class Reviewing extends ProductLoading {
   const Reviewing();
 }
 
