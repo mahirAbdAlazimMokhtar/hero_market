@@ -24,11 +24,15 @@ final class GettingUserWishlist extends WishlistState {
 }
 
 final class AddedToWishlist extends WishlistState {
-  const AddedToWishlist();
+  final String productId;
+  const AddedToWishlist({required this.productId});
+  
+  @override
+  List<Object> get props => [productId];
 }
-
 final class RemovedFromWishlist extends WishlistState {
-  const RemovedFromWishlist();
+  final String productId;
+  const RemovedFromWishlist({required this.productId});
 }
 
 final class FetchedUserWishlist extends WishlistState {

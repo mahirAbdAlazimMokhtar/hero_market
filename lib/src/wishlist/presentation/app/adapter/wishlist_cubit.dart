@@ -32,31 +32,31 @@ class WishlistCubit extends Cubit<WishlistState> {
     );
   }
 
-  Future<void> addToWishlist({
-    required String userId,
-    required String productId,
-  }) async {
-    emit(const AddingToWishlist());
-    final result = await _addToWishlist(
-      AddToWishlistParams(userId: userId, productId: productId),
-    );
-    result.fold(
-      (failure) => emit(WishlistError(failure.errorMessage)),
-      (_) => emit(const AddedToWishlist()),
-    );
-  }
+Future<void> addToWishlist({
+  required String userId,
+  required String productId,
+}) async {
+  emit(const AddingToWishlist());
+  final result = await _addToWishlist(
+    AddToWishlistParams(userId: userId, productId: productId),
+  );
+  result.fold(
+    (failure) => emit(WishlistError(failure.errorMessage)),
+    (_) => emit(AddedToWishlist(productId: productId)),
+  );
+}
 
-  Future<void> removeFromWishlist({
-    required String userId,
-    required String productId,
-  }) async {
-    emit(const RemovingFromWishlist());
-    final result = await _removeFromWishlist(
-      RemoveFromWishlistParams(userId: userId, productId: productId),
-    );
-    result.fold(
-      (failure) => emit(WishlistError(failure.errorMessage)),
-      (_) => emit(const RemovedFromWishlist()),
-    );
-  }
+Future<void> removeFromWishlist({
+  required String userId,
+  required String productId,
+}) async {
+  emit(const RemovingFromWishlist());
+  final result = await _removeFromWishlist(
+    RemoveFromWishlistParams(userId: userId, productId: productId),
+  );
+  result.fold(
+    (failure) => emit(WishlistError(failure.errorMessage)),
+    (_) => emit(RemovedFromWishlist(productId: productId)),
+  );
+}
 }
