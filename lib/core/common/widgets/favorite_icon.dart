@@ -5,33 +5,10 @@ import 'package:hero_market/core/common/app/providers/user_provider.dart';
 import 'package:hero_market/core/resources/styles/colors.dart';
 import 'package:hero_market/core/services/injection_container.dart';
 import 'package:hero_market/core/utils/core_utils.dart';
-import 'package:hero_market/src/auth/presentation/app/adapter/cubit/auth_cubit.dart';
 import 'package:hero_market/src/user/presentation/app/adapter/cubit/auth_user_cubit.dart';
 import 'package:hero_market/src/wishlist/presentation/app/adapter/wishlist_cubit.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
-
-class FavoriteICon extends StatelessWidget {
-  const FavoriteICon({super.key, required this.productId});
-  final String productId;
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => sl<WishlistCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => sl<AuthUserCubit>(),
-        ),
-      ],
-      child: FavoriteIconMain(
-        productId: productId,
-      ),
-    );
-  }
-}
 
 class FavoriteIconMain extends StatelessWidget {
   const FavoriteIconMain({super.key, required this.productId});
@@ -77,10 +54,6 @@ class _FavoriteIconContent extends StatelessWidget {
           );
         }
 
-        // final isFavorite = user.wishlist.any(
-        //   (product) => product.productId == productId,
-        // );
-
         return BlocConsumer<AuthUserCubit, AuthUserState>(
           listener: (context, authUserState) {
             if (authUserState case AuthUserError(:final message)) {
@@ -88,26 +61,50 @@ class _FavoriteIconContent extends StatelessWidget {
             }
           },
           builder: (context, authUserState) {
-              bool isFavorite = false;
-  
-  if (authUserState is FetchedUser) {
-    isFavorite = authUserState.user.wishlist.any(
-      (product) => product.productId == productId,
-    );
-  }
+            bool isFavorite = false;
+
+            // Check if product is in user's wishlist from AuthUserState
+            if (authUserState is FetchedUser) {
+              isFavorite = authUserState.user.wishlist.any(
+                (product) => product.productId == productId,
+              );
+            } else {
+              // Fallback to checking the current user's wishlist
+              isFavorite = user.wishlist.any(
+                (product) => product.productId == productId,
+              );
+            }
             return BlocConsumer<WishlistCubit, WishlistState>(
               listener: (context, wishlistState) {
+                if (wishlistState is WishlistError) {
+                  CoreUtils.showSnackBar(context,
+                      message: wishlistState.message);
+                }
+
+                // تحديث AuthUserCubit بعد أي تغيير ناجح
                 if (wishlistState is AddedToWishlist ||
                     wishlistState is RemovedFromWishlist) {
                   context.read<AuthUserCubit>().getUserById(user.id);
-                } else if (wishlistState case WishlistError(:final message)) {
-                  CoreUtils.showSnackBar(context, message: message);
                 }
               },
               builder: (context, wishlistState) {
+                // تحديث الأيقونة مباشرة بناءً على حالة WishlistCubit
+                bool localIsFavorite = isFavorite;
+
+                // إذا تمت إضافة هذا المنتج للمفضلة
+                if (wishlistState is AddedToWishlist &&
+                    wishlistState.productId == productId) {
+                  localIsFavorite = true;
+                }
+
+                // إذا تمت إزالة هذا المنتج من المفضلة
+                if (wishlistState is RemovedFromWishlist &&
+                    wishlistState.productId == productId) {
+                  localIsFavorite = false;
+                }
+
                 if (wishlistState is RemovingFromWishlist ||
-                    wishlistState is AddingToWishlist ||
-                    authUserState is AuthLoading) {
+                    wishlistState is AddingToWishlist) {
                   return const Center(
                     child: CupertinoActivityIndicator(),
                   );
@@ -116,7 +113,7 @@ class _FavoriteIconContent extends StatelessWidget {
                 return IconButton(
                   onPressed: () {
                     final wishlistCubit = context.read<WishlistCubit>();
-                    if (isFavorite) {
+                    if (localIsFavorite) {
                       wishlistCubit.removeFromWishlist(
                         userId: user.id,
                         productId: productId,
@@ -129,7 +126,7 @@ class _FavoriteIconContent extends StatelessWidget {
                     }
                   },
                   icon: Icon(
-                    isFavorite ? IconlyBold.heart : IconlyBroken.heart,
+                    localIsFavorite ? IconlyBold.heart : IconlyBroken.heart,
                     color: AppColors.lightThemeSecondaryColor,
                   ),
                 );
