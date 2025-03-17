@@ -93,27 +93,27 @@ final router = GoRouter(
         GoRoute(
             path: HomeViews.path,
             routes: [
-            GoRoute(
-              path: AllNewArrivalsView.path,
-              builder: (_, __) => ChangeNotifierProvider(
-                create: (context) => SearchControllers(),
-                child: BlocProvider(
-                  create: (_) => sl<ProductCubit>(),
-                  child: const AllNewArrivalsView(),
+              GoRoute(
+                path: AllNewArrivalsView.path,
+                builder: (_, __) => ChangeNotifierProvider(
+                  create: (context) => SearchControllers(),
+                  child: BlocProvider(
+                    create: (_) => sl<ProductCubit>(),
+                    child: const AllNewArrivalsView(),
+                  ),
                 ),
               ),
-            ),
-            GoRoute(
-              path: AllPopularView.path,
-              builder: (_, __) => ChangeNotifierProvider(
-                create: (context) => SearchControllers(),
-                child: BlocProvider(
-                  create: (_) => sl<ProductCubit>(),
-                  child: const AllPopularView(),
+              GoRoute(
+                path: AllPopularView.path,
+                builder: (_, __) => ChangeNotifierProvider(
+                  create: (context) => SearchControllers(),
+                  child: BlocProvider(
+                    create: (_) => sl<ProductCubit>(),
+                    child: const AllPopularView(),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
             builder: (_, __) => BlocProvider(
                   create: (_) => sl<ProductCubit>(),
                   child: HomeViews(),
@@ -123,9 +123,7 @@ final router = GoRouter(
         GoRoute(
             path: WishlistView.path, builder: (_, __) => const WishlistView()),
       ],
-      
     ),
-
     GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: ProfileView.path,
@@ -150,22 +148,21 @@ final router = GoRouter(
         ),
       ),
     ),
-
-    //    GoRoute(
-    //   parentNavigatorKey: rootNavigatorKey,
-    //   path: '/products/:productId',
-    //   builder: (_, state) {
-    //     return MultiBlocProvider(
-    //       providers: [
-    //         BlocProvider(create: (_) => sl<ProductCubit>()),
-    //         BlocProvider(create: (_) => sl<CartCubit>()),
-    //       ],
-    //       child: ProductDetailsView(
-    //         state.pathParameters['productId'] as String,
-    //       ),
-    //     );
-    //   },
-    // ),
+    GoRoute(
+      parentNavigatorKey: rootNavigatorKey,
+      path: '/products/:productId',
+      builder: (_, state) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<ProductCubit>()),
+            BlocProvider(create: (_) => sl<CartCubit>()),
+          ],
+          child: ProductDetailsView(
+            state.pathParameters['productId'] as String,
+          ),
+        );
+      },
+    ),
     GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: SearchView.path,
